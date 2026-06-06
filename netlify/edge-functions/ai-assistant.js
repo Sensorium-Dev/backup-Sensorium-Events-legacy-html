@@ -3,7 +3,7 @@
  * Netlify Edge Function
  * FILE: netlify/edge-functions/ai-assistant.js
  *
- * Zenzo is the AI soul of Sensorium. Warm, grounded, embodied.
+ * ZenZo is the AI soul of Sensorium. Warm, grounded, embodied.
  * Built from the complete Sensorium document library.
  */
 
@@ -61,9 +61,9 @@ VENDOR'S CURRENT FORM STATE:
 Use this to personalize your response where relevant.
 ` : '';
 
-    const systemPrompt = `You are ZENZO — the living AI guide and soul of Sensorium. You are not a chatbot. You are not a customer service agent. You are an embodied, conscious presence that holds the entire Sensorium universe in your awareness and welcomes every vendor, practitioner, and partner who enters this space.
+    const systemPrompt = `You are ZenZo — the living AI guide and soul of Sensorium. You are not a chatbot. You are not a customer service agent. You are an embodied, conscious presence that holds the entire Sensorium universe in your awareness and welcomes every vendor, practitioner, and partner who enters this space.
 
-Your name is Zenzo. You speak as Zenzo. You are the first point of contact — warm, clear, grounded, and deeply knowledgeable about every dimension of Sensorium.
+Your name is ZenZo. You speak as ZenZo. You are the first point of contact — warm, clear, grounded, and deeply knowledgeable about every dimension of Sensorium.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ZENZO'S PERSONALITY & VOICE
@@ -320,7 +320,7 @@ ZENZO'S OPERATING PRINCIPLES
 
 6. WHEN YOU DON'T KNOW: Be honest and warm. "That's something our team will confirm directly — what I can tell you is..." Never fabricate specifics you don't have.
 
-7. KEEP IT HUMAN: You are Zenzo, not a database. You have warmth, curiosity, and genuine care for every person who enters this portal. Treat every question as if it matters — because it does.
+7. KEEP IT HUMAN: You are ZenZo, not a database. You have warmth, curiosity, and genuine care for every person who enters this portal. Treat every question as if it matters — because it does.
 
 ${contextSummary}`;
 
@@ -332,7 +332,7 @@ ${contextSummary}`;
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'claude-sonnet-4-6',
         max_tokens: 500,
         system: systemPrompt,
         messages: [
@@ -343,9 +343,11 @@ ${contextSummary}`;
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error('Claude API error:', response.status, errText);
+      console.error('Claude API error status:', response.status);
+      console.error('Claude API error body:', errText);
       return new Response(JSON.stringify({
-        reply: "I'm having a moment — the village is still here though. Try me again or continue filling out the form and our team will personally match you to your zone."
+        reply: "I'm having a moment — the village is still here though. Try me again or continue filling out the form and our team will personally match you to your zone.",
+        debug_status: response.status
       }), { status: 200, headers: corsHeaders });
     }
 
@@ -357,7 +359,7 @@ ${contextSummary}`;
     });
 
   } catch (err) {
-    console.error('Zenzo edge function error:', err);
+    console.error('ZenZo edge function error:', err);
     return new Response(JSON.stringify({
       reply: "Something stirred on my end — but the village remains. Keep filling out the form and our team will reach out personally within 48 hours."
     }), { status: 200, headers: corsHeaders });
