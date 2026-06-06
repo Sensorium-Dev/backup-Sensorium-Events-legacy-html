@@ -2754,7 +2754,7 @@ async function callAI(message) {
   statusText.textContent = 'Thinking...';
 
   // Thinking indicator
-  const thinking = addAIMessage('✦ finding your answer...', 'thinking');
+  const thinking = addAIMessage('ZenZo is finding your answer...', 'thinking');
 
   // Build vendor context from current form state
   const vendorContext = {
@@ -2831,15 +2831,15 @@ async function submitToNetlify(profileData) {
     <div class="ai-header">
       <div class="ai-avatar">✦</div>
       <div class="ai-header-text">
-        <div class="ai-name">SENSORIUM AI</div>
-        <div class="ai-status" id="aiStatusText">Zone · Tier · Fit Advisor</div>
+        <div class="ai-name">ZenZo</div>
+        <div class="ai-status" id="aiStatusText">Your Sensorium Guide</div>
       </div>
       <button class="ai-close" onclick="toggleAI()">×</button>
     </div>
 
     <div class="ai-messages" id="aiMessages">
       <div class="ai-msg assistant">
-        Welcome ✦ I'm here to help you find your perfect zone, choose the right tier, and make sure your offering aligns with what Sensorium is building. What can I help you with?
+        Welcome ✦ I'm ZenZo — the living guide of Sensorium. I'm here to help you find your zone, choose your tier, and understand what it truly means to be part of what we're building. What can I help you with?
       </div>
     </div>
 
@@ -2855,7 +2855,7 @@ async function submitToNetlify(profileData) {
         type="text"
         class="ai-input"
         id="aiInput"
-        placeholder="Ask anything about Sensorium..."
+        placeholder="Ask ZenZo anything..."
         onkeydown="if(event.key==='Enter') sendAIMessage()"
         maxlength="300"
       >
@@ -2863,7 +2863,7 @@ async function submitToNetlify(profileData) {
     </div>
   </div>
 
-  <button class="ai-toggle-btn" onclick="toggleAI()" title="Ask the Sensorium AI">
+  <button class="ai-toggle-btn" onclick="toggleAI()" title="Ask ZenZo — your Sensorium guide">
     <div class="ai-pulse"></div>
     ✦
   </button>
