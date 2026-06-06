@@ -1,28 +1,27 @@
 # SENSORIUM — Netlify Configuration
 # FILE LOCATION IN YOUR REPO: netlify.toml (root level, same folder as index.html)
-#
-# This file tells Netlify exactly how to build and run your site.
-# It wires up the Edge Function, form handling, and security headers.
 
 [build]
   publish = "."
   command = ""
 
 # ── EDGE FUNCTIONS ──────────────────────────────────────────────────────
-# Maps the URL /api/ai-assistant to our Claude AI edge function
 [[edge_functions]]
   function = "ai-assistant"
   path = "/api/ai-assistant"
 
+# ── ENVIRONMENT ──────────────────────────────────────────────────────────
+# Tells Netlify which env vars to expose to Edge Functions
+[build.environment]
+  NODE_VERSION = "18"
+
 # ── REDIRECTS ────────────────────────────────────────────────────────────
-# Ensures all routes serve index.html (needed when we add routing later)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
 # ── SECURITY HEADERS ─────────────────────────────────────────────────────
-# These protect your site and improve your Lighthouse security score
 [[headers]]
   for = "/*"
   [headers.values]
@@ -32,12 +31,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-# ── FORM HANDLING ────────────────────────────────────────────────────────
-# Netlify auto-detects forms with the netlify attribute
-# No extra config needed — just the attribute in the HTML
-
 # ── CACHING ──────────────────────────────────────────────────────────────
-# Cache static assets aggressively, never cache the HTML itself
 [[headers]]
   for = "/assets/*"
   [headers.values]
