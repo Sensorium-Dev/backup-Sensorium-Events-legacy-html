@@ -1374,11 +1374,15 @@
   <input name="tier">
   <input name="recurring">
   <input name="boothSize">
+  <input name="powerNeeds">
   <input name="instagram">
   <input name="website">
+  <input name="followerRange">
   <input name="referralSource">
   <input name="referrerName">
+  <input name="otherReferral">
   <input name="specialNotes">
+  <input name="insurance">
   <input name="status">
 </form>
 
@@ -2637,24 +2641,48 @@ function submitProfile() {
   state.profileId = profileId;
 
   // Build data object (in production: POST to your API / Google Apps Script)
+  // Helper to safely get element value
+  const gv = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+  const gr = name => { const el = document.querySelector('input[name="'+name+'"]:checked, input[name="'+name+'"].checked'); return el ? el.value : ''; };
+
+  // Get recurring selection
+  const recurringEl = document.querySelector('#recurringGroup .check-item.checked input');
+  const recurringVal = recurringEl ? recurringEl.value : '';
+
+  // Get insurance selection
+  const insuranceEl = document.querySelector('#insuranceGroup .check-item.checked input');
+  const insuranceVal = insuranceEl ? insuranceEl.value : '';
+
+  // Get follower range
+  const followerEl = document.querySelector('#followerRangeGroup .theme-tag.selected');
+  const followerVal = followerEl ? followerEl.dataset.val : '';
+
   const profileData = {
-    id: profileId,
+    profileId: profileId,
     timestamp: new Date().toISOString(),
-    brandName: document.getElementById('brandName').value,
-    ownerName: document.getElementById('ownerName').value,
+    brandName: gv('brandName'),
+    ownerName: gv('ownerName'),
     email: email,
-    phone: document.getElementById('phone').value,
-    tagline: document.getElementById('tagline').value,
-    bio: document.getElementById('bio').value,
-    vendorType: state.vendorType,
-    zones: state.zones,
-    tags: state.tags,
-    themeKeywords: state.themeKeywords,
-    themeStatement: document.getElementById('themeStatement').value,
-    tier: state.tier,
-    instagram: document.getElementById('instagram').value,
-    website: document.getElementById('website').value,
-    boothSize: document.getElementById('boothSize').value,
+    phone: gv('phone'),
+    tagline: gv('tagline'),
+    bio: gv('bio'),
+    vendorType: state.vendorType || '',
+    zones: Array.isArray(state.zones) ? state.zones.join(', ') : (state.zones || ''),
+    tags: Array.isArray(state.tags) ? state.tags.join(', ') : (state.tags || ''),
+    themeKeywords: Array.isArray(state.themeKeywords) ? state.themeKeywords.join(', ') : (state.themeKeywords || ''),
+    themeStatement: gv('themeStatement'),
+    tier: state.tier || '',
+    recurring: recurringVal,
+    boothSize: gv('boothSize'),
+    powerNeeds: gv('powerNeeds'),
+    instagram: gv('instagram'),
+    website: gv('website'),
+    followerRange: followerVal,
+    referralSource: gv('referralSource'),
+    referrerName: gv('referrerName'),
+    otherReferral: gv('otherReferral'),
+    specialNotes: gv('specialNotes'),
+    insurance: insuranceVal,
     status: 'pending'
   };
 
@@ -2789,18 +2817,13 @@ async function callAI(message) {
 
 // ── NETLIFY FORM SUBMISSION ─────────────────────────────────────────────────
 async function submitToNetlify(profileData) {
-  // Encode data as form fields for Netlify Forms
   const formData = new URLSearchParams();
   formData.append('form-name', 'vendor-profile');
-  formData.append('bot-field', ''); // honeypot
+  formData.append('bot-field', '');
 
-  // Append all profile fields
+  // Append all profile fields — arrays already joined as strings in profileData
   Object.entries(profileData).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      formData.append(key, value.join(', '));
-    } else {
-      formData.append(key, value || '');
-    }
+    formData.append(key, value != null ? String(value) : '');
   });
 
   try {
