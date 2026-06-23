@@ -1759,7 +1759,7 @@
     </div>
     <div class="field-error" id="err-tier" style="display:none; margin-top:8px;">Please select a tier</div>
 
-    <div class="divider-label"><span class="divider-text">Commitment & Logistics</span></div>
+    <div class="divider-label"><span class="divider-text" style="color:var(--gold);">Commitment & Logistics</span></div>
 
     <div class="card">
       <div class="field-group">
@@ -1870,33 +1870,33 @@
     </div>
 
     
-    <div class="card" style="background:linear-gradient(135deg,rgba(26,74,64,0.08),rgba(200,146,42,0.06));border:2px solid rgba(26,74,64,0.2);">
+    <div class="card" style="background:linear-gradient(135deg,#c8a030,#e8c060,#c8903a);border:2px solid rgba(200,160,48,0.6);color:#1a1a1a;">
       <div class="step-section-title" style="margin-bottom:16px;">
         <span class="step-section-icon">💰</span>Vendor Placement Cost Summary
       </div>
       <div id="costSummaryRows" style="font-family:'DM Sans',sans-serif;font-size:14px;">
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);">
-          <span style="color:var(--ink-dim);">Booth Tier</span>
-          <span id="cs-tier" style="font-weight:600;color:var(--forest);background:white;padding:3px 10px;border-radius:12px;border:1px solid rgba(30,140,90,0.2);">—</span>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(26,26,26,0.12);">
+          <span style="color:rgba(26,26,26,0.7);">Booth Tier</span>
+          <span id="cs-tier" style="font-weight:700;color:#0e1e1a;background:rgba(255,255,255,0.9);padding:4px 12px;border-radius:12px;">—</span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(26,26,26,0.12);">
           <span style="color:var(--ink-dim);">6ft Tables × <span id="cs-table-count">0</span> @ $15ea</span>
           <span id="cs-tables" style="font-weight:500;">$0</span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(26,26,26,0.12);">
           <span style="color:var(--ink-dim);">Foldable Chairs × <span id="cs-chair-count">0</span> @ $5ea</span>
           <span id="cs-chairs" style="font-weight:500;">$0</span>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(26,26,26,0.12);">
           <span style="color:var(--ink-dim);">Power Requirements</span>
           <span id="cs-power" style="font-weight:500;">$0</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:12px 0 0;margin-top:4px;">
-          <span style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--forest);">GRAND TOTAL</span>
-          <span id="cs-grand-total" style="font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--forest);">$0</span>
+          <span style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#1a1a1a;">GRAND TOTAL</span>
+          <span id="cs-grand-total" style="font-family:'Cinzel',serif;font-size:20px;font-weight:900;color:#1a1a1a;">$0</span>
         </div>
       </div>
-      <p class="field-hint" style="margin-top:12px;font-size:11px;">* Inaugural event pricing. All fees confirmed upon acceptance.</p>
+      <p style="margin-top:12px;font-size:11px;font-family:'DM Sans',sans-serif;color:rgba(26,26,26,0.6);">✦ Inaugural event pricing · All fees confirmed upon acceptance</p>
     </div>
 
     <div class="btn-row">
@@ -2182,7 +2182,7 @@
           <option value="friend">A friend or colleague</option>
           <option value="wellness-community">Local wellness community</option>
           <option value="google">Google search</option>
-          <option value="frequency-shift">Frequency Shift Labs</option>
+          <option value="print-material">Physical Poster / Flyer / Biz Card</option>
           <option value="event">Another event or gathering</option>
           <option value="other">Other</option>
         </select>
@@ -2197,6 +2197,14 @@
       <div class="field-group" id="otherReferralField" style="display:none; margin-bottom:0;">
         <label class="field-label">Tell us more</label>
         <input type="text" class="field-input" id="otherReferral" placeholder="Where or how did you discover Sensorium?">
+      </div>
+      <div class="field-group" id="wellnessCommunityField" style="display:none; margin-bottom:0;">
+        <label class="field-label">Which community?</label>
+        <input type="text" class="field-input" id="wellnessCommunity" placeholder="e.g. Delray Holistic Circle, Miami Wellness Hub...">
+      </div>
+      <div class="field-group" id="otherEventField" style="display:none; margin-bottom:0;">
+        <label class="field-label">Which event or gathering?</label>
+        <input type="text" class="field-input" id="otherEvent" placeholder="Event name or where you saw us...">
       </div>
     </div>
 
@@ -2554,10 +2562,14 @@ function selectFollower(el) {
 
 // ── REFERRAL CHANGE ────────────────────────────────────────────────────
 function handleReferralChange(val) {
-  const nameField = document.getElementById('referrerNameField');
-  const otherField = document.getElementById('otherReferralField');
-  nameField.style.display = val === 'friend' ? 'block' : 'none';
-  otherField.style.display = val === 'other' ? 'block' : 'none';
+  var nameField = document.getElementById('referrerNameField');
+  var otherField = document.getElementById('otherReferralField');
+  var wellnessField = document.getElementById('wellnessCommunityField');
+  var eventField = document.getElementById('otherEventField');
+  if (nameField) nameField.style.display = val === 'friend' ? 'block' : 'none';
+  if (otherField) otherField.style.display = val === 'other' ? 'block' : 'none';
+  if (wellnessField) wellnessField.style.display = val === 'wellness-community' ? 'block' : 'none';
+  if (eventField) eventField.style.display = val === 'event' ? 'block' : 'none';
 }
 
 // ── FOLLOWER LABEL (legacy — kept for safety) ─────────────────────────
