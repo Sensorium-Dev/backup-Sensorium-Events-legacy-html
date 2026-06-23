@@ -136,9 +136,9 @@
     position:relative; overflow:hidden; cursor:pointer;
   }
   .portal-card::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity 0.3s; border-radius:18px; }
-  .portal-card.vendor::before { background:linear-gradient(135deg,rgba(30,106,90,0.15),rgba(200,160,48,0.08)); }
-  .portal-card.practitioner::before { background:linear-gradient(135deg,rgba(200,160,48,0.12),rgba(90,62,138,0.15)); }
-  .portal-card:hover { border-color:rgba(200,160,48,0.3); transform:translateY(-4px); box-shadow:0 20px 56px rgba(0,0,0,0.3); }
+  .portal-card.vendor::before { background:linear-gradient(135deg,rgba(26,74,64,0.45),rgba(30,106,90,0.35),rgba(200,160,48,0.22)); }
+  .portal-card.practitioner::before { background:linear-gradient(135deg,rgba(60,20,100,0.45),rgba(90,40,140,0.35),rgba(200,160,48,0.22)); }
+  .portal-card:hover { border-color:rgba(200,160,48,0.4); transform:translateY(-4px); box-shadow:0 20px 56px rgba(0,0,0,0.35); }
   .portal-card:hover::before { opacity:1; }
 
   .card-icon { font-size:32px; margin-bottom:14px; display:block; }
@@ -250,15 +250,49 @@
     </a>
   </div>
 
-  <!-- ECONOMICS -->
-  <div class="economics-strip">
-    <div class="econ-item">
-      <div class="econ-pct">54%</div>
-      <div class="econ-label">All Ticket Revenue<br>Split Between Practitioners</div>
-    </div>
-    <div class="econ-item">
-      <div class="econ-pct">6%</div>
-      <div class="econ-label">Ticket &amp; Vendor Revenue<br>to Non-Profit Partners</div>
+  <!-- PARTNER PROCEEDS SPLIT -->
+  <div style="margin-bottom:20px;">
+    <div class="section-label">Partner Proceeds Split</div>
+    <div class="economics-strip" style="flex-direction:column;gap:0;padding:0;overflow:hidden;">
+
+      <!-- Row 1: 54% + 6% -->
+      <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div class="econ-item" style="padding:24px 20px;">
+          <div class="econ-pct">54%</div>
+          <div class="econ-label">All Ticket Revenue<br>Split Between Practitioners</div>
+        </div>
+        <div class="econ-item" style="padding:24px 20px;">
+          <div class="econ-pct">6%</div>
+          <div class="econ-label">Ticket &amp; Vendor Revenue<br>to Non-Profit Partners</div>
+        </div>
+      </div>
+
+      <!-- Row 2: 12% -->
+      <div style="border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div style="padding:22px 28px;display:flex;align-items:flex-start;gap:20px;">
+          <div style="flex-shrink:0;text-align:center;min-width:72px;">
+            <div class="econ-pct">12%</div>
+          </div>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold2);letter-spacing:0.5px;margin-bottom:6px;">Pay It Forward Fund</div>
+            <div class="econ-label" style="text-align:left;font-size:10px;line-height:1.6;">A dedicated portion of every event's proceeds is channeled directly into community initiatives — funding resources, access, and infrastructure that guarantee the future success of the next Sensorium gathering.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: --% Venue Partnership -->
+      <div>
+        <div style="padding:22px 28px;display:flex;align-items:flex-start;gap:20px;">
+          <div style="flex-shrink:0;text-align:center;min-width:72px;">
+            <div class="econ-pct" style="font-size:16px;letter-spacing:1px;">--%</div>
+          </div>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold2);letter-spacing:0.5px;margin-bottom:6px;">Venue Partnership</div>
+            <div class="econ-label" style="text-align:left;font-size:10px;line-height:1.6;">After ensuring all practitioners and contributors have received a fair and equitable share, the remaining ticket revenue flows to our venue partner — via a flexible, sliding-scale fee that honors the ethos that everyone involved deserves to share in the success of the event.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
