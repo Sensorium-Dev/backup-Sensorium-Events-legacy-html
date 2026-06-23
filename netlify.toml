@@ -11,14 +11,18 @@
   path = "/api/ai-assistant"
 
 # ── ENVIRONMENT ──────────────────────────────────────────────────────────
-# Tells Netlify which env vars to expose to Edge Functions
 [build.environment]
   NODE_VERSION = "18"
 
 # ── REDIRECTS ────────────────────────────────────────────────────────────
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/vendor"
+  to = "/vendor.html"
+  status = 200
+
+[[redirects]]
+  from = "/practitioner"
+  to = "/practitioner.html"
   status = 200
 
 # ── SECURITY HEADERS ─────────────────────────────────────────────────────
@@ -41,3 +45,13 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── PLUGINS ──────────────────────────────────────────────────────────────
+# Ignore Google Fonts URLs so link checker doesn't fail on external font timeouts
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+  [plugins.inputs]
+    skipPatterns = [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com"
+    ]
