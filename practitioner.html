@@ -2408,14 +2408,14 @@ async function submitForm() {
   formData.append('bot-field', '');
   Object.entries(profileData).forEach(([k, v]) => formData.append(k, v || ''));
 
-  // Fire-and-forget — NEVER await this. fetch('/') only works on Netlify.
+  // Fire-and-forget — NEVER await. fetch('/') only works on Netlify.
   // Success screen must show regardless of network result.
   fetch('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: formData.toString()
-  }).then(r => console.log('Netlify form status:', r.status))
-    .catch(e => console.warn('Netlify fetch (expected in preview):', e.message));
+  }).then(r => console.log('Netlify form response:', r.status))
+    .catch(e => console.warn('Netlify fetch note (expected outside Netlify):', e.message));
 
   // Collect zone data AFTER profileData is built (safe - state.zones still array here)
   if (typeof collectAllZoneData === 'function') {
@@ -2623,7 +2623,7 @@ updateProgress();
       var border = i > 0 ? 'border-top:1px solid #e8e0d0;' : '';
       html += '<tr>'
         + '<td style="padding:6px 0;color:#888;width:38%;font-family:Inter,sans-serif;font-size:11px;' + border + '">' + r[0] + '</td>'
-        + '<td style="padding:6px 0;color:#0d0118;font-family:Inter,sans-serif;font-size:12px;' + border + '">' + r[1] + '</td>'
+        + '<td style="padding:6px 0;color:#2d0a4a;font-family:Inter,sans-serif;font-size:12px;' + border + '">' + r[1] + '</td>'
         + '</tr>';
     });
     html += '</table>';
