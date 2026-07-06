@@ -108,7 +108,7 @@
     inset: 0;
     background:
       radial-gradient(ellipse 80% 60% at 20% 10%, rgba(74,26,106,0.35) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(200,160,48,0.15) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(200,160,48,0.10) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -2180,6 +2180,9 @@
 </div>
 
 <script>
+// ── PROFILE ID — generated ONCE at page load, stable across all Netlify retries ──
+window._sensoriumProfileId = 'SEN-PRC-' + Math.random().toString(36).substr(2,6).toUpperCase();
+
 // ── STATE ─────────────────────────────────────────────────────────────────────
 const TOTAL_STEPS = 6;
 let currentStep = 1;
@@ -2339,7 +2342,7 @@ async function submitForm() {
     return;
   }
 
-  const profileId = 'SEN-PRC-' + Math.random().toString(36).substr(2,6).toUpperCase();
+  const profileId = window._sensoriumProfileId; // Set at page load — stable across Netlify retries
 
   // Collect all zone modalities
   const zoneModsArr = [];
@@ -2408,14 +2411,15 @@ async function submitForm() {
   formData.append('bot-field', '');
   Object.entries(profileData).forEach(([k, v]) => formData.append(k, v || ''));
 
-  // Fire-and-forget — NEVER await. fetch('/') only works on Netlify.
-  // Success screen must show regardless of network result.
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: formData.toString()
-  }).then(r => console.log('Netlify form response:', r.status))
-    .catch(e => console.warn('Netlify fetch note (expected outside Netlify):', e.message));
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    });
+  } catch(err) {
+    console.log('Submission note:', err);
+  }
 
   // Collect zone data AFTER profileData is built (safe - state.zones still array here)
   if (typeof collectAllZoneData === 'function') {
