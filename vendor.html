@@ -1321,15 +1321,10 @@
     <div class="card">
       <div class="field-group" style="margin-bottom:0">
         <label class="field-label">Brand Logo / Profile Photo</label>
-        <div class="upload-zone" id="logoUploadZone" onclick="document.getElementById('logoInput').click()">
-          <span class="upload-icon">🖼️</span>
-          <div class="upload-text">
-            <strong>Click to upload</strong> your logo or brand photo<br>
-            PNG, JPG, WEBP · Max 5MB · Recommended: 400×400px square
-          </div>
-          <img class="upload-preview" id="logoPreview" alt="Logo preview">
+        <div style="margin-top:4px;">
+          <input type="url" id="logoInput" name="logoLink" placeholder="drive.google.com/... or dropbox.com/... or imgur.com/..." style="width:100%;padding:10px 14px;border:1.5px solid var(--border, #ddd);border-radius:10px;font-size:14px;font-family:inherit;outline:none;">
+          <p style="font-size:11px;color:var(--muted, #999);margin-top:6px;">Paste a link to your logo or brand photo. Set sharing to "Anyone with link can view."</p>
         </div>
-        <input type="file" class="upload-input" id="logoInput" accept="image/*" onchange="handleLogoUpload(this)">
       </div>
     </div>
 
@@ -1962,15 +1957,10 @@
       <div class="field-group">
         <label class="field-label">Product / Booth Photos</label>
         <p class="field-hint" style="margin-bottom:10px;">Upload 1–3 photos of your products, booth setup, or brand in action. These are used for vendor spotlight content.</p>
-        <div class="upload-zone" id="photoUploadZone" onclick="document.getElementById('photoInput').click()">
-          <span class="upload-icon">📸</span>
-          <div class="upload-text">
-            <strong>Click to upload</strong> product or booth photos<br>
-            PNG, JPG, WEBP · Max 5MB each · Lifestyle or white background preferred
-          </div>
+        <div style="margin-top:4px;">
+          <input type="url" id="photoInput" name="photoLink" placeholder="drive.google.com/... or dropbox.com/... or imgur.com/..." style="width:100%;padding:10px 14px;border:1.5px solid var(--border, #ddd);border-radius:10px;font-size:14px;font-family:inherit;outline:none;">
+          <p style="font-size:11px;color:var(--muted, #999);margin-top:6px;">Paste a link to a product, booth, or lifestyle photo. Set sharing to "Anyone with link can view."</p>
         </div>
-        <input type="file" class="upload-input" id="photoInput" accept="image/*" multiple onchange="handlePhotoUpload(this)">
-        <div id="photoPreviewRow" style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;"></div>
       </div>
 
       <div class="field-group" style="margin-bottom:0">
@@ -2058,14 +2048,10 @@
         </div>
         <div class="field-group" style="margin-top:14px;margin-bottom:0;">
           <label class="field-label">Product / Gift Photo <span class="field-optional">(Optional)</span></label>
-          <p class="field-hint" style="margin-bottom:8px;">Upload a photo of the item being donated — helps us feature it on social media.</p>
-          <div style="border:1.5px dashed rgba(200,146,42,0.4);border-radius:10px;padding:16px;text-align:center;background:rgba(200,146,42,0.03);cursor:pointer;" onclick="document.getElementById('giftPhotoUpload').click()">
-            <input type="file" id="giftPhotoUpload" accept="image/*" style="display:none;" onchange="handleGiftPhoto(this)">
-            <div id="giftPhotoPreview" style="display:none;margin-bottom:10px;"><img id="giftPhotoImg" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid rgba(200,146,42,0.3);" alt="Gift preview"></div>
-            <div id="giftPhotoPlaceholder" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(26,74,64,0.5);">
-              📷 TAP TO UPLOAD PHOTO
-            </div>
-            <p style="font-size:11px;color:rgba(26,74,64,0.4);margin-top:6px;font-family:'DM Sans',sans-serif;">Or paste a link below</p>
+          <p class="field-hint" style="margin-bottom:8px;">Paste a link to a photo of the item being donated — helps us feature it on social media.</p>
+          <div style="margin-top:6px;">
+            <input type="url" id="giftPhotoUpload" name="giftPhotoLink" placeholder="drive.google.com/... or dropbox.com/... or imgur.com/..." style="width:100%;padding:10px 14px;border:1.5px dashed rgba(200,146,42,0.4);border-radius:10px;font-size:13px;font-family:inherit;background:rgba(200,146,42,0.03);outline:none;">
+            <p style="font-size:11px;color:rgba(26,74,64,0.5);margin-top:6px;font-family:'DM Sans',sans-serif;">Paste a link to a photo of your gift item. Set to "Anyone with link can view."</p>
           </div>
           <input type="url" class="field-input" id="giftPhotoLink" placeholder="drive.google.com/... or dropbox.com/..." style="margin-top:10px;">
         </div>
@@ -2267,6 +2253,9 @@
 </main>
 
 <script>
+// ── PROFILE ID — generated ONCE at page load, stable across all Netlify retries ──
+window._sensoriumProfileId = 'SEN-VND-' + Math.random().toString(36).substr(2,6).toUpperCase();
+
 // ── STATE ──────────────────────────────────────────────────────────────
 const state = {
   currentStep: 1,
@@ -2580,40 +2569,8 @@ function updateFollowerLabel(v) {
 }
 
 // ── FILE UPLOADS ───────────────────────────────────────────────────────
-function handleLogoUpload(input) {
-  if (!input.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const zone = document.getElementById('logoUploadZone');
-    const preview = document.getElementById('logoPreview');
-    preview.src = e.target.result;
-    preview.style.display = 'block';
-    zone.classList.add('has-file');
-    // Update avatar in preview
-    const avatarImg = document.getElementById('ppAvatarImg');
-    avatarImg.src = e.target.result;
-    avatarImg.style.display = 'block';
-    document.getElementById('ppAvatarEmoji').style.display = 'none';
-  };
-  reader.readAsDataURL(input.files[0]);
-}
 
-function handlePhotoUpload(input) {
-  const row = document.getElementById('photoPreviewRow');
-  row.innerHTML = '';
-  Array.from(input.files).slice(0, 3).forEach(file => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      img.style.cssText = 'width:100px; height:80px; object-fit:cover; border-radius:8px; border:1px solid var(--border);';
-      row.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
-}
 
-// ── PROFILE PREVIEW ─────────────────────────────────────────────────────
 function updateProfilePreview() {
   const get = id => { const el = document.getElementById(id); return el ? el.value : ''; };
 
@@ -2645,7 +2602,7 @@ function updateProfilePreview() {
 
   // Generate profile ID
   if (!state.profileId) {
-    state.profileId = 'SEN-VND-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+    state.profileId = window._sensoriumProfileId; // stable page-load value
   }
   document.getElementById('ppId').textContent = 'PROFILE ID: ' + state.profileId;
 }
@@ -2655,7 +2612,7 @@ function submitProfile() {
   if (!validateStep(7)) return;
 
   const email = document.getElementById('email').value;
-  const profileId = state.profileId || 'SEN-VND-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+  const profileId = window._sensoriumProfileId; // stable since page load — dedup works
   state.profileId = profileId;
 
   // Build data object (in production: POST to your API / Google Apps Script)
@@ -2720,11 +2677,13 @@ function submitProfile() {
   formData.append('form-name', 'vendor-profile');
   formData.append('bot-field', '');
   Object.entries(profileData).forEach(([k,v]) => formData.append(k, v != null ? String(v) : ''));
+  // Fire-and-forget — success screen shows immediately. Never block on this.
   fetch('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: formData.toString()
-  }).catch(err => console.log('Netlify form note:', err));
+  }).then(r => console.log('Netlify form status:', r.status))
+    .catch(e => console.warn('Netlify fetch note (expected outside Netlify):', e.message));
 
   console.log('SENSORIUM VENDOR PROFILE SUBMITTED:', profileData);
 
@@ -2821,21 +2780,7 @@ updateFollowerLabel(2);
   }
 
 
-  function handleGiftPhoto(input) {
-    if (!input.files || !input.files[0]) return;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('giftPhotoImg').src = e.target.result;
-      document.getElementById('giftPhotoPreview').style.display = 'block';
-      document.getElementById('giftPhotoPlaceholder').textContent = '✓ Photo added';
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-
-  // ── VENDOR PLACEMENT COST CALCULATOR ─────────────────────────────────────────
-  var TIER_PRICES = { 'tier1': 45, 'tier2': 75, 'tier3': 125, 'tier3-lockin': 110, 'tier2-lockin': 65, 'tier1-lockin': 40 };
-  var POWER_PRICES = { 'none': 0, 'standard': 25, 'high': 35, 'own': 0 };
-
+  
   function updateCostSummary() {
     var tables = parseInt(document.getElementById('tableCount') ? document.getElementById('tableCount').textContent : '0') || 0;
     var chairs = parseInt(document.getElementById('chairCount') ? document.getElementById('chairCount').textContent : '0') || 0;

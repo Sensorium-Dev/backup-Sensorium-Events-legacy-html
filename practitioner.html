@@ -761,7 +761,7 @@
     font-weight: 600;
     transition: all 0.2s;
   }
-  .cta-ig { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: white; }
+  .cta-ig { background: linear-gradient(135deg, var(--teal), var(--teal2)); color: white; }
   .cta-wa { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: var(--dark); }
 
   /* ── ZenZo WIDGET ── */
@@ -1432,14 +1432,10 @@
       <div class="field">
         <label>Headshot / Photo</label>
         <div class="photo-upload-wrap">
-          <div class="photo-preview" id="photoPreview">
-            <span class="photo-icon">✦</span>
-            <input type="file" accept="image/*" id="photoFile" onchange="handlePhoto(this)">
-          </div>
-          <div class="photo-info">
-            <p>Tap to upload from your camera roll — or paste a link below.</p>
-            <span class="photo-link-label">Or paste a photo link</span>
-            <input type="url" id="headshotLink" placeholder="drive.google.com/... or dropbox.com/...">
+          <div class="photo-info" style="width:100%;">
+            <p style="margin-bottom:8px;">Paste a link to your headshot — Google Drive, Dropbox, or any public image URL.</p>
+            <p style="font-size:11px;opacity:0.7;margin-bottom:12px;">Make sure the link is set to "Anyone with link can view."</p>
+            <input type="url" id="headshotLink" placeholder="drive.google.com/... or dropbox.com/... or imgur.com/..." style="width:100%;">
           </div>
         </div>
       </div>
@@ -1861,10 +1857,12 @@
 
       <div class="field">
         <label>Product / Service Image <span class="opt">(optional — used for social promotion)</span></label>
-        <div style="border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:border-color 0.2s;" onclick="document.getElementById('productImageInput').click()" id="productImageZone">
-          <div style="font-size:24px;margin-bottom:8px;">📸</div>
+        <div style="margin-top:6px;">
+          <input type="url" id="productImageInput" placeholder="drive.google.com/... or dropbox.com/... or imgur.com/..." style="width:100%;">
+          <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">Paste a link to a product or service image. Set to "Anyone with link can view."</p>
+        </div>
           <p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);">Tap to upload a product or service photo<br><span style="font-size:11px;">Used for vendor spotlights and social promotion</span></p>
-          <input type="file" id="productImageInput" accept="image/*" style="display:none;" onchange="handleProductImage(this)">
+          
         </div>
         <div id="productImagePreview" style="display:none;margin-top:10px;"></div>
         <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);margin-top:8px;">Or paste a link: <input type="url" id="productImageLink" placeholder="drive.google.com/... or instagram.com/..." style="border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;width:280px;outline:none;"></p>
@@ -1936,11 +1934,9 @@
           <div class="field" style="margin-top:14px;">
             <label>Product / Gift Photo <span class="opt">(optional)</span></label>
             <p style="font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:8px;">Upload a photo of the item — helps us feature your donation on social media.</p>
-            <div style="border:1.5px dashed rgba(74,26,106,0.3);border-radius:10px;padding:16px;text-align:center;background:rgba(74,26,106,0.02);cursor:pointer;" onclick="document.getElementById('pracGiftPhotoUpload').click()">
-              <input type="file" id="pracGiftPhotoUpload" accept="image/*" style="display:none;" onchange="handlePracGiftPhoto(this)">
-              <div id="pracGiftPhotoPreview" style="display:none;margin-bottom:8px;"><img id="pracGiftPhotoImg" style="max-width:100px;max-height:100px;border-radius:8px;object-fit:cover;" alt="Gift preview"></div>
-              <div id="pracGiftPhotoLabel" style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;color:var(--muted);">📷 Tap to upload photo</div>
-              <p style="font-size:11px;color:var(--muted);margin-top:6px;font-family:'Inter',sans-serif;">Or paste a link: <input type="url" id="pracGiftPhotoLink" placeholder="drive.google.com/..." style="width:100%;margin-top:6px;padding:8px 12px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;background:white;outline:none;" onclick="event.stopPropagation()"></p>
+            <div style="margin-top:6px;">
+              <input type="url" id="pracGiftPhotoLink" placeholder="drive.google.com/... or dropbox.com/... or imgur.com/..." style="width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;background:white;outline:none;">
+              <p style="font-size:11px;color:var(--muted);margin-top:6px;font-family:'Inter',sans-serif;">Paste a link to a photo of the gift item. Set to "Anyone with link can view."</p>
             </div>
           </div>
         </div>
@@ -2305,139 +2301,7 @@ function toggleTopic(card) {
 }
 
 // ── PHOTO UPLOAD ──────────────────────────────────────────────────────────────
-function handlePhoto(input) {
-  if (!input.files || !input.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    var imgSrc = e.target.result;
-    // Update step 1 preview circle
-    var preview = document.getElementById('photoPreview');
-    if (preview) preview.innerHTML = '<img src="' + imgSrc + '" alt="Headshot" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
-    // Update step 6 profile review avatar
-    var reviewAvatar = document.getElementById('pracAvatarReview');
-    if (reviewAvatar) reviewAvatar.innerHTML = '<img src="' + imgSrc + '" style="width:100%;height:100%;object-fit:cover;">';
-    // Update success page avatar
-    var successAvatar = document.getElementById('successAvatarPrac');
-    if (successAvatar) successAvatar.innerHTML = '<img src="' + imgSrc + '" style="width:100%;height:100%;object-fit:cover;">';
-    // Store for later use
-    state._headshotData = imgSrc;
-  };
-  reader.readAsDataURL(input.files[0]);
-}
 
-// ── SUBMIT ────────────────────────────────────────────────────────────────────
-async function submitForm() {
-  const emailVal = document.getElementById('email').value.trim();
-  const nameVal = document.getElementById('fullName').value.trim();
-  if (!nameVal || !emailVal) {
-    alert('Please enter your name and email to continue.');
-    goTo(1);
-    return;
-  }
-  var phoneVal = document.getElementById('phone') ? document.getElementById('phone').value.trim() : '';
-  var locationVal = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
-  if (!phoneVal || !locationVal) {
-    alert('Phone number and city/location are required.');
-    goTo(1);
-    return;
-  }
-
-  const profileId = window._sensoriumProfileId; // Set at page load — stable across Netlify retries
-
-  // Collect all zone modalities
-  const zoneModsArr = [];
-  document.querySelectorAll('[id^="zone-mods-"]').forEach(group => {
-    const zone = group.id.replace('zone-mods-','');
-    const selected = [...group.querySelectorAll('.chip.selected')].map(c => c.textContent.trim());
-    if (selected.length) zoneModsArr.push('Zone ' + zone + ': ' + selected.join(', '));
-  });
-
-  const gv = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
-  const gr = id => { const el = document.querySelector('#' + id + ' .radio-pill.selected'); return el ? el.textContent.trim() : ''; };
-
-  const profileData = {
-    profileId,
-    timestamp: new Date().toISOString(),
-    fullName: nameVal,
-    preferredName: gv('preferredName'),
-    email: emailVal,
-    phone: gv('phone'),
-    location: gv('location'),
-    instagram: gv('instagram'),
-    facebook: gv('facebook'),
-    website: gv('website'),
-    linkedin: gv('linkedin'),
-    practitionerType: (Array.isArray(state.practitionerTypes) ? (Array.isArray(state.practitionerTypes) ? state.practitionerTypes.join(', ') : (state.practitionerTypes || '')) : (state.practitionerTypes || '')),
-    primaryModality: gv('primaryModality'),
-    secondaryModality: gv('secondaryModality'),
-    certifications: gv('certifications'),
-    experience: gr('experienceGroup'),
-    bio: gv('bio'),
-    zones: Array.isArray(state.zones) ? (Array.isArray(state.zones) ? state.zones.join(', ') : (state.zones || '')) : (state._zonesForSubmit || state.zones || ''),
-    sessionFormats: (Array.isArray(state.sessionFormats) ? (Array.isArray(state.sessionFormats) ? state.sessionFormats.join(', ') : (state.sessionFormats || '')) : (state.sessionFormats || '')),
-    sessionLengths: (Array.isArray(state.sessionLengths) ? (Array.isArray(state.sessionLengths) ? state.sessionLengths.join(', ') : (state.sessionLengths || '')) : (state.sessionLengths || '')),
-    sessionCapacity: gr('capacityGroup'),
-    zoneModalities: zoneModsArr.join(' | '),
-    customZoneModality: gv('customZoneModality'),
-    equipmentNeeds: gv('equipmentNeeds'),
-    taughtChildren: gr('childrenGroup'),
-    speakingTypes: (Array.isArray(state.speakingTypes) ? (Array.isArray(state.speakingTypes) ? state.speakingTypes.join(', ') : (state.speakingTypes || '')) : (state.speakingTypes || '')),
-    suggestedTopic: gv('suggestedTopic'),
-    topicsSelected: (Array.isArray(state.topicsSelected) ? state.topicsSelected.join(' | ') : (state.topicsSelected || '')),
-    themeKeywords: (Array.isArray(state.themeKeywords) ? (Array.isArray(state.themeKeywords) ? state.themeKeywords.join(', ') : (state.themeKeywords || '')) : (state.themeKeywords || '')),
-    followerRange: (() => { const el = document.querySelector('#followerRangeGroup .chip.selected'); return el ? (el.dataset.val || el.textContent.trim()) : ''; })(),
-    headshotLink: gv('headshotLink'),
-    videoLink: gv('videoLink'),
-    additionalLinks: gv('additionalLinks'),
-    mediaPermission: 'granted',
-    insurance: state.insurance || '',
-    setupNeeds: state.setupNeeds || '',
-    referralSource: state.referralSource,
-    referrerName: gv('referrerName'),
-    participateGift: state.participateGift ? 'yes' : 'no',
-    giftTitle: state.participateGift ? gv('giftTitle') : '',
-    giftDescription: state.participateGift ? gv('giftDescription') : '',
-    giftRetailPrice: state.participateGift ? gv('giftRetailPrice') : '',
-    giftCostOfGoods: state.participateGift ? gv('giftCostOfGoods') : '',
-    giftQuantity: state.participateGift ? gv('giftQuantity') : '',
-    giftType: state.participateGift ? gr('giftTypeGroup') : '',
-    giftCreditedTo: state.participateGift ? gv('giftCreditedTo') : '',
-    status: 'pending'
-  };
-
-  // Submit to Netlify
-  const formData = new URLSearchParams();
-  formData.append('form-name', 'practitioner-profile');
-  formData.append('bot-field', '');
-  Object.entries(profileData).forEach(([k, v]) => formData.append(k, v || ''));
-
-  try {
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString()
-    });
-  } catch(err) {
-    console.log('Submission note:', err);
-  }
-
-  // Collect zone data AFTER profileData is built (safe - state.zones still array here)
-  if (typeof collectAllZoneData === 'function') {
-    try { collectAllZoneData(); } catch(e) { console.log('zone collect:', e); }
-  }
-  // Collect step 6 fields
-  var gvS6 = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
-  var grS6 = function(g) { var el = document.querySelector('#' + g + ' .radio-pill.selected'); return el ? el.textContent.trim() : ''; };
-  profileData.insurance = grS6('insuranceGroup') || profileData.insurance || '';
-  profileData.setupNeeds = gvS6('setupNeeds') || '';
-  if (gvS6('referralSource')) profileData.referralSource = gvS6('referralSource');
-  profileData.referrerName = gvS6('referrerName') || '';
-
-  // Show success
-  showSuccessScreen(profileData);
-}
-
-// ── ZenZo ─────────────────────────────────────────────────────────────────────
 function toggleZenZo() {
   document.getElementById('zenzenPanel').classList.toggle('open');
 }
@@ -2636,39 +2500,121 @@ updateProgress();
     if (el) el.innerHTML = html;
   }
 
-  // (submit logic merged into submitForm - see async function submitForm above)
-
-
-  function handleProductImage(input) {
-    if (!input.files || !input.files[0]) return;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      var preview = document.getElementById('productImagePreview');
-      preview.style.display = 'block';
-      preview.innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:10px;max-height:200px;object-fit:cover;">';
-      document.getElementById('productImageZone').style.borderColor = 'var(--teal2)';
-    };
-    reader.readAsDataURL(input.files[0]);
+async function submitForm() {
+  const emailVal = document.getElementById('email').value.trim();
+  const nameVal = document.getElementById('fullName').value.trim();
+  if (!nameVal || !emailVal) {
+    alert('Please enter your name and email to continue.');
+    goTo(1);
+    return;
+  }
+  var phoneVal = document.getElementById('phone') ? document.getElementById('phone').value.trim() : '';
+  var locationVal = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
+  if (!phoneVal || !locationVal) {
+    alert('Phone number and city/location are required.');
+    goTo(1);
+    return;
   }
 
+  const profileId = window._sensoriumProfileId; // stable since page load
 
-  // ── ZONE DATA ────────────────────────────────────────────────────────────────
-  const ZONE_DATA = {
-    '01': { name:'Breath Portal', chakra:'Root', modalities:['Pranayama','Box Breathing','Somatic Release','EFT Tapping','Wim Hof Method','Vagus Activation','Reiki','Shadow Integration'] },
-    '02': { name:'Consciousness Expansion', chakra:'Sacral', modalities:['Guided Meditation','Mindfulness','Ecstatic Dance','Flow Arts','Shadow Work','Binaural Beats','Oracle Work'] },
-    '03': { name:'Sensorium Soundscapes', chakra:'Solar Plexus', modalities:['Crystal Singing Bowls','Tibetan Bowls','Gongs','Native Flute','Drums','Live Ambient Performance','Drum Circles'] },
-    '04': { name:'Quantum Reset Pod', chakra:'Heart', modalities:['Red Light Therapy','PEMF','Massage','Bodywork','Chiropractic','IV Therapy','Binaural Entrainment','Theta Meditation'] },
-    '05': { name:'The Warrior Path', chakra:'Throat', modalities:['Tai Chi','Qigong','Capoeira','BJJ','Kickboxing','Aikido','Kung Fu','Breathwork & Martial Arts'] },
-    '06': { name:'Activation Arena', chakra:'Third Eye', modalities:['Power Yoga','HIIT','Calisthenics','Ecstatic Dance','Hot Yoga','Functional Fitness','Studio Showcase'] },
-    '08': { name:'Elixir Lounge', chakra:'Alchemy', modalities:['Ceremonial Cacao','Adaptogen Elixirs','Kava','Mushroom Blends','Herbal Alchemy','Blue Lotus','Supplement Consultations'] },
-    '09': { name:'The Grove', chakra:'Earth', modalities:['Plant-Based Meals','Superfoods','Cold-Pressed Juice','Fermented Foods','Gut Health','Herbalist Consultations'] },
-    '10': { name:'The Village', chakra:'Community', modalities:['Crystal Readings','Tarot','Astrology','Numerology','Oracle Readings','Reiki','Energy Work','Intuitive Sessions'] },
-    '11': { name:'Starfield', chakra:'Wonder', modalities:['Kids Breathwork','Youth Yoga','Storytelling','Art & Nature Crafts','Teen Leadership','Teen Mindfulness','Family Sound Bath'] }
+  // Collect all zone modalities
+  const zoneModsArr = [];
+  document.querySelectorAll('[id^="zone-mods-"]').forEach(group => {
+    const zone = group.id.replace('zone-mods-','');
+    const selected = [...group.querySelectorAll('.chip.selected')].map(c => c.textContent.trim());
+    if (selected.length) zoneModsArr.push('Zone ' + zone + ': ' + selected.join(', '));
+  });
+
+  const gv = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const gr = id => { const el = document.querySelector('#' + id + ' .radio-pill.selected'); return el ? el.textContent.trim() : ''; };
+
+  const profileData = {
+    profileId,
+    timestamp: new Date().toISOString(),
+    fullName: nameVal,
+    preferredName: gv('preferredName'),
+    email: emailVal,
+    phone: gv('phone'),
+    location: gv('location'),
+    instagram: gv('instagram'),
+    facebook: gv('facebook'),
+    website: gv('website'),
+    linkedin: gv('linkedin'),
+    practitionerType: (Array.isArray(state.practitionerTypes) ? (Array.isArray(state.practitionerTypes) ? state.practitionerTypes.join(', ') : (state.practitionerTypes || '')) : (state.practitionerTypes || '')),
+    primaryModality: gv('primaryModality'),
+    secondaryModality: gv('secondaryModality'),
+    certifications: gv('certifications'),
+    experience: gr('experienceGroup'),
+    bio: gv('bio'),
+    zones: Array.isArray(state.zones) ? (Array.isArray(state.zones) ? state.zones.join(', ') : (state.zones || '')) : (state._zonesForSubmit || state.zones || ''),
+    sessionFormats: (Array.isArray(state.sessionFormats) ? (Array.isArray(state.sessionFormats) ? state.sessionFormats.join(', ') : (state.sessionFormats || '')) : (state.sessionFormats || '')),
+    sessionLengths: (Array.isArray(state.sessionLengths) ? (Array.isArray(state.sessionLengths) ? state.sessionLengths.join(', ') : (state.sessionLengths || '')) : (state.sessionLengths || '')),
+    sessionCapacity: gr('capacityGroup'),
+    zoneModalities: zoneModsArr.join(' | '),
+    customZoneModality: gv('customZoneModality'),
+    equipmentNeeds: gv('equipmentNeeds'),
+    taughtChildren: gr('childrenGroup'),
+    speakingTypes: (Array.isArray(state.speakingTypes) ? (Array.isArray(state.speakingTypes) ? state.speakingTypes.join(', ') : (state.speakingTypes || '')) : (state.speakingTypes || '')),
+    suggestedTopic: gv('suggestedTopic'),
+    topicsSelected: (Array.isArray(state.topicsSelected) ? state.topicsSelected.join(' | ') : (state.topicsSelected || '')),
+    themeKeywords: (Array.isArray(state.themeKeywords) ? (Array.isArray(state.themeKeywords) ? state.themeKeywords.join(', ') : (state.themeKeywords || '')) : (state.themeKeywords || '')),
+    followerRange: (() => { const el = document.querySelector('#followerRangeGroup .chip.selected'); return el ? (el.dataset.val || el.textContent.trim()) : ''; })(),
+    headshotLink: gv('headshotLink'),
+    videoLink: gv('videoLink'),
+    additionalLinks: gv('additionalLinks'),
+    mediaPermission: 'granted',
+    insurance: state.insurance || '',
+    setupNeeds: state.setupNeeds || '',
+    referralSource: state.referralSource,
+    referrerName: gv('referrerName'),
+    participateGift: state.participateGift ? 'yes' : 'no',
+    giftTitle: state.participateGift ? gv('giftTitle') : '',
+    giftDescription: state.participateGift ? gv('giftDescription') : '',
+    giftRetailPrice: state.participateGift ? gv('giftRetailPrice') : '',
+    giftCostOfGoods: state.participateGift ? gv('giftCostOfGoods') : '',
+    giftQuantity: state.participateGift ? gv('giftQuantity') : '',
+    giftType: state.participateGift ? gr('giftTypeGroup') : '',
+    giftCreditedTo: state.participateGift ? gv('giftCreditedTo') : '',
+    status: 'pending'
   };
-  const SESSION_FORMATS = ['Workshop','Group Class','Private Session','Event Activation','Demonstration'];
-  const zoneSessionData = {}; // stores all rates/modalities per zone
 
-  // ── ZONE CARD TOGGLE ─────────────────────────────────────────────────────────
+  // Submit to Netlify
+  const formData = new URLSearchParams();
+  formData.append('form-name', 'practitioner-profile');
+  formData.append('bot-field', '');
+  Object.entries(profileData).forEach(([k, v]) => formData.append(k, v || ''));
+
+  // Fire-and-forget — NEVER await. fetch('/') only resolves on Netlify.
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: formData.toString()
+  }).then(r => console.log('Netlify form status:', r.status))
+    .catch(e => console.warn('Netlify fetch note (expected outside Netlify):', e.message));
+
+  // Collect zone data AFTER profileData is built (safe - state.zones still array here)
+  if (typeof collectAllZoneData === 'function') {
+    try { collectAllZoneData(); } catch(e) { console.log('zone collect:', e); }
+  }
+  // Collect step 6 fields
+  var gvS6 = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  var grS6 = function(g) { var el = document.querySelector('#' + g + ' .radio-pill.selected'); return el ? el.textContent.trim() : ''; };
+  profileData.insurance = grS6('insuranceGroup') || profileData.insurance || '';
+  profileData.setupNeeds = gvS6('setupNeeds') || '';
+  if (gvS6('referralSource')) profileData.referralSource = gvS6('referralSource');
+  profileData.referrerName = gvS6('referrerName') || '';
+
+  // Show success
+  showSuccessScreen(profileData);
+}
+
+// ── ZenZo ─────────────────────────────────────────────────────────────────────
+
+  // (submit logic above)
+
+
+  
   function toggleZoneCard(card, zoneNum) {
     card.classList.toggle('selected');
     if (card.classList.contains('selected')) {
@@ -2969,18 +2915,7 @@ updateProgress();
   }
 
 
-  function handlePracGiftPhoto(input) {
-    if (!input.files || !input.files[0]) return;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('pracGiftPhotoImg').src = e.target.result;
-      document.getElementById('pracGiftPhotoPreview').style.display = 'block';
-      document.getElementById('pracGiftPhotoLabel').textContent = '✓ Photo added';
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-
-
+  
   function showSuccessScreen(profileData) {
     // Hide the form
     var mf = document.getElementById('mainForm');
