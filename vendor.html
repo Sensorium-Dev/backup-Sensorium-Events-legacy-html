@@ -1201,28 +1201,6 @@
 </head>
 <body>
 
-<!-- Netlify Form Detection -->
-<form name="vendor-profile" netlify netlify-honeypot="bot-field" hidden>
-  <input type="hidden" name="form-name" value="vendor-profile">
-  <input name="bot-field">
-  <input name="profileId"><input name="brandName"><input name="ownerName">
-  <input name="email"><input name="phone"><input name="location">
-  <input name="tagline"><input name="bio"><input name="vendorType">
-  <input name="zones"><input name="tags"><input name="themeKeywords">
-  <input name="themeStatement"><input name="tier"><input name="recurring">
-  <input name="boothSize">
-  <input name="tableCount">
-  <input name="chairCount"><input name="powerNeeds">
-  <input name="instagram"><input name="website"><input name="tiktok">
-  <input name="facebook"><input name="linkedin"><input name="followerRange">
-  <input name="referralSource"><input name="referrerName"><input name="otherReferral">
-  <input name="specialNotes"><input name="insurance">
-  <input name="participateGift"><input name="giftTitle"><input name="giftDescription">
-  <input name="giftRetailPrice"><input name="giftCostOfGoods">
-  <input name="giftQuantity"><input name="giftType"><input name="giftCreditedTo">
-  <input name="status">
-</form>
-
 <!-- HEADER -->
 <header class="portal-header">
   <div class="logo-mark">
@@ -2253,7 +2231,7 @@
 </main>
 
 <script>
-// ── PROFILE ID — generated ONCE at page load, stable across all Netlify retries ──
+// ── PROFILE ID — generated ONCE at page load, stable across any retry ──
 window._sensoriumProfileId = 'SEN-VND-' + Math.random().toString(36).substr(2,6).toUpperCase();
 
 // ── STATE ──────────────────────────────────────────────────────────────
@@ -2672,18 +2650,21 @@ function submitProfile() {
     status: 'pending'
   };
 
-  // Submit to Netlify Forms
-  const formData = new URLSearchParams();
-  formData.append('form-name', 'vendor-profile');
-  formData.append('bot-field', '');
-  Object.entries(profileData).forEach(([k,v]) => formData.append(k, v != null ? String(v) : ''));
+  // Submit directly to the Apps Script Web App — bypasses Netlify Forms
+  // and its outgoing-webhook relay entirely. One hop, no reshaping.
+  const SENSORIUM_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzsaKmv5c6T88iKIN0rfg7QxEVQcWsbuHDxeymKZkabQ2XWch0rEIedfKi73iZop-M6/exec';
+  profileData['form-name'] = 'vendor-profile';
   // Fire-and-forget — success screen shows immediately. Never block on this.
-  fetch('/', {
+  // mode:'no-cors' lets the request fire without needing to read the response
+  // (Apps Script doesn't return CORS headers). Content-Type text/plain avoids
+  // a CORS preflight (Apps Script can't handle an OPTIONS request).
+  fetch(SENSORIUM_WEBHOOK_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: formData.toString()
-  }).then(r => console.log('Netlify form status:', r.status))
-    .catch(e => console.warn('Netlify fetch note (expected outside Netlify):', e.message));
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(profileData)
+  }).then(() => console.log('Submitted directly to Sensorium webhook'))
+    .catch(e => console.warn('Webhook fetch note:', e.message));
 
   console.log('SENSORIUM VENDOR PROFILE SUBMITTED:', profileData);
 
