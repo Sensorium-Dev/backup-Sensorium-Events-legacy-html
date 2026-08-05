@@ -1482,6 +1482,17 @@
     box-shadow: 0 4px 16px rgba(200,160,48,0.22) !important;
   }
 
+
+  .category-card.selected[data-cat="D"] {
+    background: linear-gradient(135deg, #3a1e6a, #5a3e8a) !important;
+    border-color: #5a3e8a !important;
+    box-shadow: 0 6px 20px rgba(90,62,138,0.28) !important;
+  }
+  .category-card[data-cat="D"] .cat-letter { color: #5a3e8a; }
+  .category-card[data-cat="D"] .cat-name   { color: #5a3e8a; }
+  .category-card[data-cat="D"] .cat-price  { color: #5a3e8a; }
+  .category-card[data-cat="D"] { border-color: rgba(90,62,138,0.35); }
+
 </style>
 </head>
 <body>
@@ -1918,7 +1929,7 @@
         <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:#666;line-height:1.6;margin-bottom:18px;">Read all three before choosing. Your category determines which tier options and prices apply to you.</p>
 
         <!-- Category A/B/C cards -->
-        <div class="cat-grid" id="categoryCards">
+        <div class="cat-grid" id="categoryCards" style="grid-template-columns:1fr 1fr;">
 
           <div class="category-card" onclick="selectCategory(this,'A')" data-cat="A">
             <div class="cat-letter">A</div>
@@ -1939,6 +1950,13 @@
             <div class="cat-name">Presenting Partner</div>
             <div class="cat-desc">Brands with their own initiative — studios, clinics, regional brands with a broader agenda</div>
             <div class="cat-price">From $375 / event</div>
+          </div>
+
+          <div class="category-card" onclick="selectCategory(this,'D')" data-cat="D">
+            <div class="cat-letter">D</div>
+            <div class="cat-name">Non-Profit &amp; Partner</div>
+            <div class="cat-desc">Non-profits, Sensorium practitioners, and panelists — here to co-create, not just participate</div>
+            <div class="cat-price">$ — Fee subject to approval</div>
           </div>
 
         </div>
@@ -2144,6 +2162,16 @@
               <div class="radio-pill" onclick="selectPower(this,'high')" data-power="high" style="padding:8px 14px;font-size:12px;">High-draw power (+$35)</div>
             </div>
           </div>
+
+          <!-- Other / Special Requests -->
+          <div style="background:#f8f5ef;border:1px solid #e0d5c0;border-radius:10px;padding:12px 14px;margin-top:12px;">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Other / Special Requests</div>
+            <textarea id="boothSpecialRequests" rows="3"
+              style="width:100%;border:1.5px solid #e0d5c0;border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:#333;background:#fff;resize:vertical;outline:none;box-sizing:border-box;line-height:1.5;"
+              placeholder="Describe any additional setup requirements, equipment you're bringing, special dimensions, refrigeration, water access, load-in timing, or anything else we should know about your booth setup…"></textarea>
+            <p style="font-family:'DM Sans',sans-serif;font-size:11px;color:#aaa;margin-top:6px;">This helps us plan your space accurately and coordinate with venue ops before the event.</p>
+          </div>
+
         </div>
 
         <!-- Cost Summary -->
@@ -2562,7 +2590,7 @@ const state = {
   tier: null,
   tags: [],
   themeKeywords: [],
-  profileId: null
+  profileId: 'SEN-VND-' + Math.random().toString(36).substr(2, 6).toUpperCase()
 };
 
 // ── NAVIGATION ─────────────────────────────────────────────────────────
@@ -2646,7 +2674,8 @@ function validateStep(step) {
       if (errCat) errCat.style.display = 'block';
       valid = false;
     }
-    if (!state.tier) {
+    // Cat D: tier is optional (D1 is free, tiers are marketing add-ons)
+    if (!state.tier && state.vendorCategory !== 'D') {
       var errT = document.getElementById('err-tier');
       if (errT) errT.style.display = 'block';
       valid = false;
@@ -2721,7 +2750,8 @@ function selectVendorType(el, type) {
     var CAT_INFO = {
       A: { label: 'Category A · Community Activator', desc: 'You are programming the space — your fee reflects the activation value you bring.', color: '#1e6a5a', bg: 'rgba(26,74,64,0.08)', border: 'rgba(26,74,64,0.3)' },
       B: { label: 'Category B · Product & Marketplace Vendor', desc: 'You bring the marketplace energy — curated placement by sense alignment and product fit.', color: '#1a3a30', bg: '#f8f5ef', border: '#e0d5c0' },
-      C: { label: 'Category C · Presenting Partner', desc: 'Your brand has its own initiative — anchor placement, signage integration, and co-branded marketing.', color: '#c8a030', bg: 'rgba(200,160,48,0.06)', border: 'rgba(200,160,48,0.3)' }
+      C: { label: 'Category C · Presenting Partner', desc: 'Your brand has its own initiative — anchor placement, signage integration, and co-branded marketing.', color: '#c8a030', bg: 'rgba(200,160,48,0.06)', border: 'rgba(200,160,48,0.3)' },
+      D: { label: 'Category D · Non-Profit & Sensorium Partner', desc: 'Your participation is mission-driven — base placement is subject to fee waiver or reduction upon approval. Select a marketing add-on tier below to amplify your presence and reach within the Sensorium community.', color: '#5a3e8a', bg: 'rgba(90,62,138,0.07)', border: 'rgba(90,62,138,0.25)' }
     };
     if (badge && badgeText) {
       var info = CAT_INFO[cat];
@@ -2773,6 +2803,44 @@ function selectVendorType(el, type) {
       // Update TIER_PRICES for calculator
       TIER_PRICES['tier' + n] = t.single;
     });
+
+    // Category D: update feature lists to reflect add-on nature
+    var isD = (cat === 'D');
+    var featuresD = [
+      [
+        'Listed in Sensorium digital + print program',
+        'Non-Profit / Partner badge on your profile',
+        'Complimentary entry for up to 2 team members',
+        'Goodie bag contribution option',
+        'Listed on Sensorium website partner page',
+        'Access to the Sensorium vendor community network'
+      ],
+      [
+        'Everything in D1',
+        'Dedicated IG Story highlighting your mission',
+        'Named shoutout by MC during the event',
+        'Featured in Sensorium post-event email recap',
+        'Cross-promotion across Sensorium social channels',
+        'Co-branded mention in pre-event marketing push'
+      ],
+      [
+        'Everything in D2',
+        'Dedicated IG feed post — mission spotlight',
+        'Co-branded visual in all event digital collateral',
+        'Logo on event flyer (print + digital)',
+        'Acknowledged during opening & closing ceremony',
+        'Featured segment in Sensorium podcast or panel',
+        'Priority placement consideration for future events'
+      ]
+    ];
+    if (isD) {
+      [1,2,3].forEach(function(n) {
+        var fl = document.getElementById('tc' + n + '-features');
+        if (fl) {
+          fl.innerHTML = featuresD[n-1].map(function(f) { return '<li>' + f + '</li>'; }).join('');
+        }
+      });
+    }
 
     // Reset tier selection visuals
     document.querySelectorAll('.tier-card').forEach(function(tc) {
@@ -3024,7 +3092,8 @@ function updateProfilePreview() {
 
 // ── SUBMIT ─────────────────────────────────────────────────────────────
 function submitProfile() {
-  if (!validateStep(7)) return;
+  // No additional validation needed — step 6 is review only
+  // (validation ran on steps 1-5 as user progressed)
 
   const email = document.getElementById('email').value;
   const profileId = state.profileId || 'SEN-VND-' + Math.random().toString(36).substr(2, 6).toUpperCase();
@@ -3084,6 +3153,7 @@ function submitProfile() {
     giftQuantity: giftDonating ? gv('giftQuantity') : '',
     giftType: giftDonating ? giftType : '',
     giftCreditedTo: giftDonating ? gv('giftCreditedTo') : '',
+    boothSpecialRequests: gv('boothSpecialRequests'),
     status: 'pending'
   };
 
@@ -3100,9 +3170,9 @@ function submitProfile() {
 
   console.log('SENSORIUM VENDOR PROFILE SUBMITTED:', profileData);
 
-  // Show success step
-  document.getElementById('step-7').classList.remove('active');
-  document.getElementById('step-8').classList.add('active');
+  // Show success screen
+  document.getElementById('step-6').classList.remove('active');
+  document.getElementById('step-7').classList.add('active');
 
   // Update success screen
   document.getElementById('confirmEmail').textContent = email;
@@ -3220,6 +3290,11 @@ updateFollowerLabel(2);
       { label: 'C1 · Local Partner',       name: 'Community Presence',  single: 375, lock: 285 },
       { label: 'C2 · Regional Partner',    name: 'Sensorium Featured',  single: 575, lock: 440 },
       { label: 'C3 · Headline Partner',    name: 'Presenting Partner',  single: 995, lock: 795 }
+    ],
+    D: [
+      { label: 'D1 · Essential Presence',  name: 'Directory Listing',   single: 0,   lock: 0   },
+      { label: 'D2 · Social Spotlight',    name: 'Featured Exposure',   single: 75,  lock: 60  },
+      { label: 'D3 · Full Amplification',  name: 'Brand Amplification', single: 150, lock: 120 }
     ]
   };
   var TIER_PRICES = { 'tier1': 0, 'tier2': 0, 'tier3': 0 }; // populated by selectVendorType
@@ -3270,7 +3345,7 @@ updateFollowerLabel(2);
     var grand = (isMonthly && !isLockIn) ? 0 : (tierCost + tableCost + chairCost + powerCost);
 
     // Display labels
-    var catLabel = cat ? { A: 'Cat A', B: 'Cat B', C: 'Cat C' }[cat] : null;
+    var catLabel = cat ? { A: 'Cat A', B: 'Cat B', C: 'Cat C', D: 'Cat D' }[cat] : null;
     var tierLabel = tierData
       ? (catLabel + ' · ' + tierData.label + ' · ' + tierData.name)
       : (cat ? 'Select a tier' : 'Select category + tier');
@@ -3376,14 +3451,19 @@ updateFollowerLabel(2);
     var CAT_INFO = {
       A: { label: 'Category A · Community Activator', desc: 'You are programming the space — your fee reflects the activation value you bring.' },
       B: { label: 'Category B · Product & Marketplace Vendor', desc: 'Curated product placement by sense alignment and audience fit.' },
-      C: { label: 'Category C · Presenting Partner', desc: 'Anchor presence with signage, co-branding, and full marketing integration.' }
+      C: { label: 'Category C · Presenting Partner', desc: 'Anchor presence with signage, co-branding, and full marketing integration.' },
+      D: { label: 'Category D · Non-Profit & Sensorium Partner', desc: 'For non-profits, registered practitioners, and Sensorium panelists. Base fee is subject to waiver or reduction upon approval. Optional marketing add-ons available below.' }
     };
     var info = CAT_INFO[cat];
     var hdr = document.getElementById('s6-cat-header');
     var lbl = document.getElementById('s6-cat-label');
     var dsc = document.getElementById('s6-cat-desc');
-    if (hdr) hdr.style.display = 'block';
-    if (lbl) lbl.textContent = info.label;
+    if (hdr) {
+      hdr.style.display = 'block';
+      hdr.style.borderColor = info.border || '#e0d5c0';
+      hdr.style.background = info.bg || '#f8f5ef';
+    }
+    if (lbl) { lbl.textContent = info.label; lbl.style.color = info.color || '#1a3a30'; }
     if (dsc) dsc.textContent = info.desc;
 
     var noteEl = document.getElementById('categoryNote');
@@ -3392,7 +3472,8 @@ updateFollowerLabel(2);
     var NOTES = {
       A: 'Community Activators keep pricing lower because your activation adds programming value to Sensorium. The more you contribute to the experience, the more we invest in showcasing your brand.',
       B: 'Product Vendors make up the heart of the marketplace. Your placement is curated by category, zone alignment, and sense fit — not first-come first-served. ⚠️ Food & beverage vendors must select Category B.',
-      C: 'Presenting Partners receive the highest visibility tier — anchor placement, signage at your space, podcast shoutout, and co-branded event marketing. Limited to a small number of brands per event.'
+      C: 'Presenting Partners receive the highest visibility tier — anchor placement, signage at your space, podcast shoutout, and co-branded event marketing. Limited to a small number of brands per event.',
+      D: 'Non-Profits and Sensorium Partners: your base participation fee is $0 and subject to full waiver upon review. The tiers below are optional marketing add-ons — choose one if you want additional promotion, or select D1 to be listed at no cost.'
     };
     if (noteText) noteText.textContent = NOTES[cat];
 
