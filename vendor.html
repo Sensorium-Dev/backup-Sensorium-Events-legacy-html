@@ -1505,7 +1505,7 @@
   <input name="email"><input name="phone"><input name="location">
   <input name="tagline"><input name="bio"><input name="vendorType">
   <input name="zones"><input name="tags"><input name="themeKeywords">
-  <input name="themeStatement"><input name="tier"><input name="recurring">
+  <input name="themeStatement"><input name="tier"><input name="eventDatesSelected"><input name="lockInStatus"><input name="tierRatePerEvent"><input name="recurring">
   <input name="boothSize">
   <input name="tableCount">
   <input name="chairCount"><input name="powerNeeds">
@@ -1877,21 +1877,21 @@
             <div class="cat-letter">A</div>
             <div class="cat-name">Community Activator</div>
             <div class="cat-desc">Practitioners, teachers, healers, movement leaders — your table IS the experience</div>
-            <div class="cat-price">From $95 / event</div>
+            <div class="cat-price">From $77 / event</div>
           </div>
 
           <div class="category-card" onclick="selectCategory(this,'B')" data-cat="B">
             <div class="cat-letter">B</div>
             <div class="cat-name">Product Vendor</div>
             <div class="cat-desc">Wellness goods, elixirs, food, artisan products — you sell products from your booth</div>
-            <div class="cat-price">From $125 / event</div>
+            <div class="cat-price">From $111 / event</div>
           </div>
 
           <div class="category-card" onclick="selectCategory(this,'C')" data-cat="C">
             <div class="cat-letter">C</div>
             <div class="cat-name">Presenting Partner</div>
             <div class="cat-desc">Brands with their own initiative — studios, clinics, regional brands with a broader agenda</div>
-            <div class="cat-price">From $375 / event</div>
+            <div class="cat-price">From $345 / event</div>
           </div>
 
           <div class="category-card" onclick="selectCategory(this,'D')" data-cat="D">
@@ -1923,12 +1923,12 @@
 
           <div class="tier-card t1" onclick="selectTier(this,'tier1')" id="tc1">
             <div class="tier-label" id="tc1-label">Tier 1</div>
-            <div class="tier-name" id="tc1-name">Community Presence</div>
+            <div class="tier-name" id="tc1-name">Resonance</div>
             <div class="tier-price" id="tc1-price">—</div>
             <div style="background:rgba(26,74,64,0.06);border:1px solid rgba(30,140,90,0.15);border-radius:8px;padding:10px 12px;margin-bottom:12px;">
               <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--forest);text-transform:uppercase;margin-bottom:6px;">Pricing</div>
               <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;">
-                <div style="display:flex;justify-content:space-between;"><span style="color:#666;">🔒 3-Event Lock-In</span><span id="tc1-lock" style="font-weight:700;color:var(--forest);">—</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:#666;">🔒 2-Date Lock-In</span><span id="tc1-lock" style="font-weight:700;color:var(--forest);">—</span></div>
                 <div style="display:flex;justify-content:space-between;"><span style="color:#666;">✦ Per-Event</span><span id="tc1-single" style="font-weight:600;color:var(--gold);">—</span></div>
               </div>
             </div>
@@ -1945,12 +1945,12 @@
           <div class="tier-card t2" onclick="selectTier(this,'tier2')" id="tc2" style="background:#f8f5ef;position:relative;">
             <div style="position:absolute;top:-1px;right:16px;background:var(--gold);color:white;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;border-radius:0 0 8px 8px;">Most Popular</div>
             <div class="tier-label" id="tc2-label">Tier 2</div>
-            <div class="tier-name" id="tc2-name">Sensorium Featured</div>
+            <div class="tier-name" id="tc2-name">Amplified</div>
             <div class="tier-price" id="tc2-price">—</div>
             <div style="background:rgba(26,74,64,0.06);border:1px solid rgba(30,140,90,0.15);border-radius:8px;padding:10px 12px;margin-bottom:12px;">
               <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--forest);text-transform:uppercase;margin-bottom:6px;">Pricing</div>
               <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;">
-                <div style="display:flex;justify-content:space-between;"><span style="color:#666;">🔒 3-Event Lock-In</span><span id="tc2-lock" style="font-weight:700;color:var(--forest);">—</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:#666;">🔒 2-Date Lock-In</span><span id="tc2-lock" style="font-weight:700;color:var(--forest);">—</span></div>
                 <div style="display:flex;justify-content:space-between;"><span style="color:#666;">✦ Per-Event</span><span id="tc2-single" style="font-weight:600;color:var(--gold);">—</span></div>
               </div>
             </div>
@@ -1968,12 +1968,12 @@
 
           <div class="tier-card t3" onclick="selectTier(this,'tier3')" id="tc3">
             <div class="tier-label" id="tc3-label">Tier 3</div>
-            <div class="tier-name" id="tc3-name">Presenting Partner</div>
+            <div class="tier-name" id="tc3-name">Presenting</div>
             <div class="tier-price" id="tc3-price">—</div>
             <div style="background:rgba(26,74,64,0.06);border:1px solid rgba(30,140,90,0.15);border-radius:8px;padding:10px 12px;margin-bottom:12px;">
               <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--forest);text-transform:uppercase;margin-bottom:6px;">Pricing</div>
               <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;">
-                <div style="display:flex;justify-content:space-between;"><span style="color:#666;">🔒 3-Event Lock-In</span><span id="tc3-lock" style="font-weight:700;color:var(--forest);">—</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:#666;">🔒 2-Date Lock-In</span><span id="tc3-lock" style="font-weight:700;color:var(--forest);">—</span></div>
                 <div style="display:flex;justify-content:space-between;"><span style="color:#666;">✦ Per-Event</span><span id="tc3-single" style="font-weight:600;color:var(--gold);">—</span></div>
               </div>
             </div>
@@ -1999,14 +1999,25 @@
 
           <div style="display:flex;flex-direction:column;gap:10px;" id="commitmentGroup">
 
-            <!-- SINGLE SELECT: All-Dates Lock-In -->
-            <div class="commitment-pill" onclick="selectCommitLockIn(this)" data-value="all-dates-lockin">
+            <!-- SHORTCUT: Delray Beach 2-Date Lock-In -->
+            <div class="commitment-pill" onclick="selectLockInPair(this, 'sep19', 'nov21')" data-value="delray-lockin">
               <div class="cp-icon">🔒</div>
               <div>
-                <div class="cp-title">All 4 Dates Lock-In Rate</div>
-                <div class="cp-desc">Commit to all four 2026 dates across both markets — Sep 19 &amp; Nov 21 in Delray Beach, Oct 18 &amp; Dec 3 in Miami — and lock in the discounted rate across the whole series. Best rate available. Selecting this clears individual date selections.</div>
+                <div class="cp-title">Delray Beach 2-Date Lock-In</div>
+                <div class="cp-desc">Confirm both Delray Beach dates — Sep 19 &amp; Nov 21 — and lock in the discounted rate for that market. Selects both dates below automatically.</div>
               </div>
             </div>
+
+            <!-- SHORTCUT: Miami 2-Date Lock-In -->
+            <div class="commitment-pill" onclick="selectLockInPair(this, 'oct18', 'dec3')" data-value="miami-lockin">
+              <div class="cp-icon">🔒</div>
+              <div>
+                <div class="cp-title">Miami 2-Date Lock-In</div>
+                <div class="cp-desc">Confirm both Miami dates — Oct 18 &amp; Dec 3 — and lock in the discounted rate for that market. Selects both dates below automatically.</div>
+              </div>
+            </div>
+
+            <p class="field-hint" style="margin:2px 0 4px;">Or hand-pick any individual dates below — the per-event rate applies unless both dates in a market are selected.</p>
 
             <!-- MULTI SELECT: Individual dates -->
             <div class="commitment-pill" onclick="toggleCommitDate(this)" data-value="sep19">
@@ -3093,6 +3104,9 @@ function submitProfile() {
     themeKeywords: Array.isArray(state.themeKeywords) ? state.themeKeywords.join(', ') : (state.themeKeywords || ''),
     themeStatement: gv('themeStatement'),
     tier: state.tier || '',
+    eventDatesSelected: (function(){ var els = document.querySelectorAll('#commitmentGroup .commitment-pill.selected'); var vals=[]; els.forEach(function(p){ var v=p.getAttribute('data-value'); if(v!=='delray-lockin'&&v!=='miami-lockin') vals.push(v); }); return vals.join(', '); })(),
+    lockInStatus: (function(){ var el = document.getElementById('cs-event'); return el ? el.textContent.trim() : ''; })(),
+    tierRatePerEvent: (function(){ var el = document.getElementById('cs-base'); return el ? el.textContent.trim() : ''; })(),
     recurring: recurringVal,
     boothSize: gv('boothSize'),
     tableCount: document.getElementById('tableCount') ? document.getElementById('tableCount').getAttribute('data-val') || '0' : '0',
@@ -3245,24 +3259,24 @@ updateFollowerLabel(2);
   // ── VENDOR PLACEMENT COST CALCULATOR ─────────────────────────────────────────
   var CATEGORY_TIERS = {
     A: [
-      { label: 'A1 · Community Activator', name: 'Community Presence',  single: 95,  lock: 75  },
-      { label: 'A2 · Featured Activator',  name: 'Sensorium Featured',  single: 150, lock: 115 },
-      { label: 'A3 · Anchor Activator',    name: 'Presenting Partner',  single: 225, lock: 170 }
+      { label: 'Tier 1', name: 'Resonance',  single: 77,  lock: 55  },
+      { label: 'Tier 2', name: 'Amplified',  single: 111, lock: 88  },
+      { label: 'Tier 3', name: 'Presenting', single: 150, lock: 111 }
     ],
     B: [
-      { label: 'B1 · Small Brand',         name: 'Community Presence',  single: 125, lock: 95  },
-      { label: 'B2 · Established Brand',   name: 'Sensorium Featured',  single: 195, lock: 150 },
-      { label: 'B3 · Premium Brand',       name: 'Presenting Partner',  single: 295, lock: 225 }
+      { label: 'Tier 1', name: 'Resonance',  single: 111, lock: 81  },
+      { label: 'Tier 2', name: 'Amplified',  single: 150, lock: 111 },
+      { label: 'Tier 3', name: 'Presenting', single: 210, lock: 155 }
     ],
     C: [
-      { label: 'C1 · Local Partner',       name: 'Community Presence',  single: 375, lock: 285 },
-      { label: 'C2 · Regional Partner',    name: 'Sensorium Featured',  single: 575, lock: 440 },
-      { label: 'C3 · Headline Partner',    name: 'Presenting Partner',  single: 995, lock: 795 }
+      { label: 'Tier 1', name: 'Resonance',  single: 345, lock: 245 },
+      { label: 'Tier 2', name: 'Amplified',  single: 450, lock: 330 },
+      { label: 'Tier 3', name: 'Presenting', single: 600, lock: 450 }
     ],
     D: [
-      { label: 'D1 · Essential Presence',  name: 'Directory Listing',   single: 0,   lock: 0   },
-      { label: 'D2 · Social Spotlight',    name: 'Featured Exposure',   single: 75,  lock: 60  },
-      { label: 'D3 · Full Amplification',  name: 'Brand Amplification', single: 150, lock: 120 }
+      { label: 'Tier 1', name: 'Resonance',  single: 0,   lock: 0   },
+      { label: 'Tier 2', name: 'Amplified',  single: 77,  lock: 77  },
+      { label: 'Tier 3', name: 'Presenting', single: 150, lock: 150 }
     ]
   };
   var TIER_PRICES = { 'tier1': 0, 'tier2': 0, 'tier3': 0 }; // populated by selectVendorType
@@ -3274,21 +3288,26 @@ updateFollowerLabel(2);
     var tierData = (cat && state.tier && CATEGORY_TIERS[cat] && tierIdx !== undefined)
       ? CATEGORY_TIERS[cat][tierIdx] : null;
 
-    // Read commitment state
-    var lockInEl = document.querySelector('#commitmentGroup [data-value="all-dates-lockin"].selected');
-    var isLockIn = !!lockInEl;
+    // Read commitment state — collect actual date pills only (not the shortcut pills)
     var selectedDates = [];
     document.querySelectorAll('#commitmentGroup .commitment-pill.selected').forEach(function(p) {
       var v = p.getAttribute('data-value');
-      if (v !== 'all-dates-lockin') selectedDates.push(v);
+      if (v !== 'delray-lockin' && v !== 'miami-lockin') selectedDates.push(v);
     });
     var isMonthly = selectedDates.indexOf('monthly-partner') !== -1;
+    var delrayLocked = selectedDates.indexOf('sep19') !== -1 && selectedDates.indexOf('nov21') !== -1;
+    var miamiLocked = selectedDates.indexOf('oct18') !== -1 && selectedDates.indexOf('dec3') !== -1;
+    var isLockIn = delrayLocked || miamiLocked;
 
     // Event label
     var DATE_LABELS = { sep19: 'Sep 19', oct18: 'Oct 18', nov21: 'Nov 21', dec3: 'Dec 3', 'monthly-partner': 'Monthly Partner' };
     var eventLabel;
-    if (isLockIn) {
-      eventLabel = 'All 4 Dates Lock-In Rate';
+    if (delrayLocked && miamiLocked) {
+      eventLabel = 'Delray Beach 2-Date Lock-In + Miami 2-Date Lock-In (All 4 Dates)';
+    } else if (delrayLocked) {
+      eventLabel = 'Delray Beach 2-Date Lock-In (Sep 19 + Nov 21)';
+    } else if (miamiLocked) {
+      eventLabel = 'Miami 2-Date Lock-In (Oct 18 + Dec 3)';
     } else if (selectedDates.length === 0) {
       eventLabel = '—';
     } else {
@@ -3375,36 +3394,6 @@ updateFollowerLabel(2);
 
 
   // ── VENDOR CATEGORY ─────────────────────────────────────────────────────────
-  var CATEGORY_PRICING = {
-    A: {
-      name: 'Wellness Activator',
-      note: 'Activators make the event worth attending — your fee reflects the programming value you add.',
-      tiers: [
-        { label: 'A1 · Activation Lite',     price: 75,  lock: 55,  std: 125 },
-        { label: 'A2 · Activation Standard', price: 125, lock: 90,  std: 175 },
-        { label: 'A3 · Featured Activator',  price: 195, lock: 145, std: 275 }
-      ]
-    },
-    B: {
-      name: 'Product Vendor',
-      note: 'Product vendors bring the marketplace energy — your placement is curated by audience fit and sense alignment.',
-      tiers: [
-        { label: 'B1 · Small Brand',        price: 110, lock: 80,  std: 150 },
-        { label: 'B2 · Established Brand',  price: 175, lock: 125, std: 225 },
-        { label: 'B3 · Premium Brand',      price: 260, lock: 185, std: 325 }
-      ]
-    },
-    C: {
-      name: 'Presenting Partner',
-      note: 'Presenting Partners receive anchor placement, signage integration, and co-branded event marketing.',
-      tiers: [
-        { label: 'C1 · Local Partner',     price: 345, lock: 245, std: 450 },
-        { label: 'C2 · Regional Partner',  price: 525, lock: 375, std: 695 },
-        { label: 'C3 · Headline Partner',  price: 950, lock: null, std: null }
-      ]
-    }
-  };
-
   function selectCategory(el, cat) {
     document.querySelectorAll('.category-card').forEach(function(c) {
       c.classList.remove('selected');
@@ -3484,27 +3473,42 @@ updateFollowerLabel(2);
   }
 
 
-  // ── COMMITMENT: lock-in is single-select; dates + monthly are multi-select ──
-  function selectCommitLockIn(el) {
-    // Toggle lock-in selection
-    var wasSelected = el.classList.contains('selected');
-    // Always deselect all date/monthly pills first
-    document.querySelectorAll('#commitmentGroup .commitment-pill').forEach(function(p) {
-      p.classList.remove('selected');
-    });
-    // If it wasn't selected before, select it now (toggle off if already on)
-    if (!wasSelected) {
-      el.classList.add('selected');
+  // ── COMMITMENT: two per-market 2-Date Lock-In shortcuts; dates + monthly are multi-select ──
+  function getDatePill(val) {
+    return document.querySelector('#commitmentGroup [data-value="' + val + '"]');
+  }
+
+  function syncLockInPillStates() {
+    var sep19 = getDatePill('sep19'), nov21 = getDatePill('nov21');
+    var oct18 = getDatePill('oct18'), dec3 = getDatePill('dec3');
+    var delrayPill = getDatePill('delray-lockin');
+    var miamiPill = getDatePill('miami-lockin');
+    var delrayLocked = sep19 && nov21 && sep19.classList.contains('selected') && nov21.classList.contains('selected');
+    var miamiLocked = oct18 && dec3 && oct18.classList.contains('selected') && dec3.classList.contains('selected');
+    if (delrayPill) delrayPill.classList.toggle('selected', !!delrayLocked);
+    if (miamiPill) miamiPill.classList.toggle('selected', !!miamiLocked);
+  }
+
+  // Shortcut pill: toggles both dates in a market's pair together
+  function selectLockInPair(el, date1, date2) {
+    var d1 = getDatePill(date1), d2 = getDatePill(date2);
+    var bothOn = d1 && d2 && d1.classList.contains('selected') && d2.classList.contains('selected');
+    if (bothOn) {
+      // Already locked in — clicking again clears both dates for this market
+      if (d1) d1.classList.remove('selected');
+      if (d2) d2.classList.remove('selected');
+    } else {
+      if (d1) d1.classList.add('selected');
+      if (d2) d2.classList.add('selected');
     }
+    syncLockInPillStates();
     updateCostSummary();
   }
 
   function toggleCommitDate(el) {
-    // Deselect lock-in when selecting individual dates
-    var lockIn = document.querySelector('#commitmentGroup [data-value="all-dates-lockin"]');
-    if (lockIn) lockIn.classList.remove('selected');
     // Toggle this date pill
     el.classList.toggle('selected');
+    syncLockInPillStates();
     updateCostSummary();
   }
 
