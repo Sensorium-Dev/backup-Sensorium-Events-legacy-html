@@ -1513,6 +1513,7 @@
   <input name="facebook"><input name="linkedin"><input name="followerRange">
   <input name="referralSource"><input name="referrerName"><input name="otherReferral">
   <input name="specialNotes"><input name="insurance">
+  <input name="contentAssets"><input name="assetLinkVideo"><input name="assetLinkReel"><input name="assetLinkPhoto">
   <input name="participateGift"><input name="giftTitle"><input name="giftDescription">
   <input name="giftRetailPrice"><input name="giftCostOfGoods">
   <input name="giftQuantity"><input name="giftType"><input name="giftCreditedTo">
@@ -1717,81 +1718,32 @@
 
         <div class="zone-grid" id="zoneGrid">
 
-      <div class="zone-card" onclick="selectZone(this, '01')" data-zone="01">
-        <div class="zone-number">ZONE 01</div>
-        <div class="zone-name">Breath Portal</div>
-        <span class="zone-chakra chakra-root">Root Chakra</span>
-        <div class="zone-desc">Breathwork, grounding practices, life force activation, vagus nerve work</div>
+      <div class="zone-card" onclick="selectZone(this, 'sound')" data-zone="sound">
+        <div class="zone-number">ZONE I</div>
+        <div class="zone-name">Sound</div>
+        <span class="zone-chakra chakra-solar">Resonance</span>
+        <div class="zone-desc">Gong baths, live musicians and a full frequency immersion that carries every room.</div>
       </div>
 
-      <div class="zone-card" onclick="selectZone(this, '02')" data-zone="02">
-        <div class="zone-number">ZONE 02</div>
-        <div class="zone-name">Consciousness Expansion</div>
-        <span class="zone-chakra chakra-sacral">Sacral Chakra</span>
-        <div class="zone-desc">Creativity, flow states, meditation, mindfulness, shadow work</div>
+      <div class="zone-card" onclick="selectZone(this, 'frequency')" data-zone="frequency">
+        <div class="zone-number">ZONE II</div>
+        <div class="zone-name">Frequency</div>
+        <span class="zone-chakra chakra-heart">Presence</span>
+        <div class="zone-desc">Breathwork, meditation and deep quantum exploration, held by practitioners who create the conditions, not the outcome.</div>
       </div>
 
-      <div class="zone-card" onclick="selectZone(this, '03')" data-zone="03">
-        <div class="zone-number">ZONE 03</div>
-        <div class="zone-name">Sensorium Soundscapes</div>
-        <span class="zone-chakra chakra-solar">Solar Plexus</span>
-        <div class="zone-desc">Sound baths, gongs, drums, live ambient performance, sound healing instruments</div>
+      <div class="zone-card" onclick="selectZone(this, 'energy')" data-zone="energy">
+        <div class="zone-number">ZONE III</div>
+        <div class="zone-name">Energy</div>
+        <span class="zone-chakra chakra-root">Movement</span>
+        <div class="zone-desc">MMA and other martial arts, HIIT, functional movement and ecstatic dance at the day's peak.</div>
       </div>
 
-      <div class="zone-card" onclick="selectZone(this, '04')" data-zone="04">
-        <div class="zone-number">ZONE 04</div>
-        <div class="zone-name">Quantum Reset Pod</div>
-        <span class="zone-chakra chakra-heart">Heart Chakra</span>
-        <div class="zone-desc">IV therapy, red light, PEMF, ozone, massage, chiropractic, recovery tech</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '05')" data-zone="05">
-        <div class="zone-number">ZONE 05</div>
-        <div class="zone-name">The Warrior Path</div>
-        <span class="zone-chakra chakra-throat">Throat Chakra</span>
-        <div class="zone-desc">Martial arts, discipline, expression, movement-based practice, power training</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '06')" data-zone="06">
-        <div class="zone-number">ZONE 06</div>
-        <div class="zone-name">Activation Arena</div>
-        <span class="zone-chakra chakra-third">Third Eye</span>
-        <div class="zone-desc">HIIT, functional fitness, yoga, ecstatic dance, movement brands, studios</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '07')" data-zone="07">
-        <div class="zone-number">ZONE 07</div>
-        <div class="zone-name">Knowledge Pavilion</div>
-        <span class="zone-chakra chakra-crown">Crown Chakra</span>
-        <div class="zone-desc">Keynote panel, workshops, talks, thought leadership, education vendors</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '08')" data-zone="08">
-        <div class="zone-number">ZONE 08</div>
-        <div class="zone-name">Elixir Lounge</div>
-        <span class="zone-chakra chakra-alchemy">Alchemy</span>
-        <div class="zone-desc">Ceremonial matcha, adaptogen elixirs, kava, cacao, functional beverages</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '09')" data-zone="09">
-        <div class="zone-number">ZONE 09</div>
-        <div class="zone-name">The Grove</div>
-        <span class="zone-chakra chakra-holistic">Holistic</span>
-        <div class="zone-desc">Organic food, nourishment vendors, cold-press juice, plant-based meals</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '10')" data-zone="10">
-        <div class="zone-number">ZONE 10</div>
-        <div class="zone-name">The Village</div>
+      <div class="zone-card" onclick="selectZone(this, 'vibration')" data-zone="vibration">
+        <div class="zone-number">ZONE IV</div>
+        <div class="zone-name">Vibration</div>
         <span class="zone-chakra chakra-community">Community</span>
-        <div class="zone-desc">Wellness pop-ups, readers, skincare, apothecary, conscious artisan goods</div>
-      </div>
-
-      <div class="zone-card" onclick="selectZone(this, '11')" data-zone="11">
-        <div class="zone-number">ZONE 11</div>
-        <div class="zone-name">Starfield</div>
-        <span class="zone-chakra chakra-wonder">Wonder</span>
-        <div class="zone-desc">Family zone, kids programming, community art, wonder-based experiences</div>
+        <div class="zone-desc">The marketplace, the ceremony, the shared table. Community as the frequency underneath everything else.</div>
       </div>
 
     </div>
@@ -1855,16 +1807,6 @@
     </div>
 
     <div class="card">
-      <div class="field-group">
-        <label class="field-label">Theme Alignment Statement <span class="field-required">*</span></label>
-        <textarea class="field-textarea" id="themeStatement" placeholder="Optional — tell us how your offering connects to the broader wellness themes Sensorium explores. How does what you bring support the journey of someone attending a conscious wellness event?..." maxlength="400" rows="4" oninput="updateCharCount(this, 'count-theme', 400)"></textarea>
-        <div style="display:flex; justify-content:space-between; margin-top:4px;">
-          <p class="field-hint">2–3 sentences · This is what event curators read when deciding vendor fit</p>
-          <span class="char-counter" id="count-theme">0/400</span>
-        </div>
-        <div class="field-error" id="err-themeStatement">Theme statement is required (min 80 characters)</div>
-      </div>
-
       <div class="field-group" style="margin-bottom:0">
         <label class="field-label">Past Event Experience</label>
         <div class="check-group">
@@ -2057,37 +1999,45 @@
 
           <div style="display:flex;flex-direction:column;gap:10px;" id="commitmentGroup">
 
-            <!-- SINGLE SELECT: 3-Event Lock-In -->
-            <div class="commitment-pill" onclick="selectCommitLockIn(this)" data-value="3-event-lockin">
+            <!-- SINGLE SELECT: All-Dates Lock-In -->
+            <div class="commitment-pill" onclick="selectCommitLockIn(this)" data-value="all-dates-lockin">
               <div class="cp-icon">🔒</div>
               <div>
-                <div class="cp-title">3-Event Lock-In Rate</div>
-                <div class="cp-desc">Commit to all three 2026 dates — Aug 15, Sep 19, Oct 18 — and lock in the discounted rate for the entire series. Best rate available. Selecting this clears individual date selections.</div>
+                <div class="cp-title">All 4 Dates Lock-In Rate</div>
+                <div class="cp-desc">Commit to all four 2026 dates across both markets — Sep 19 &amp; Nov 21 in Delray Beach, Oct 18 &amp; Dec 3 in Miami — and lock in the discounted rate across the whole series. Best rate available. Selecting this clears individual date selections.</div>
               </div>
             </div>
 
             <!-- MULTI SELECT: Individual dates -->
-            <div class="commitment-pill" onclick="toggleCommitDate(this)" data-value="aug15">
-              <div class="cp-icon">📅</div>
-              <div>
-                <div class="cp-title">August 15, 2026</div>
-                <div class="cp-desc">Casa ManaBliss · Delray Beach, FL · Resonance of Reality — Sound, Frequency &amp; Vibration · Per-event rate applies</div>
-              </div>
-            </div>
-
             <div class="commitment-pill" onclick="toggleCommitDate(this)" data-value="sep19">
               <div class="cp-icon">📅</div>
               <div>
-                <div class="cp-title">September 19, 2026</div>
-                <div class="cp-desc">Casa ManaBliss · Delray Beach, FL · Natural vs. Technology Biohacking — Ancient Tools &amp; Modern Science · Per-event rate applies</div>
+                <div class="cp-title">September 19, 2026 · Delray Beach</div>
+                <div class="cp-desc">Casa ManaBliss · Delray Beach, FL · Ancient Tools &amp; Modern Sciences — Natural vs. Technology Bio-Hacking · Per-event rate applies</div>
               </div>
             </div>
 
             <div class="commitment-pill" onclick="toggleCommitDate(this)" data-value="oct18">
               <div class="cp-icon">📅</div>
               <div>
-                <div class="cp-title">October 18, 2026</div>
-                <div class="cp-desc">1000 Palms Hideout · North Miami · Holistic Medicine &amp; Ceremonial Journeys — Ancient Instruments, Frequencies &amp; Sacred Ceremony with Pre &amp; Post Integration of Holistic Methodologies &amp; Modalities · Per-event rate applies</div>
+                <div class="cp-title">October 18, 2026 · Miami</div>
+                <div class="cp-desc">1000 Palms Hideout · Miami, FL · iii Points Weekend · The Longevity Protocol — Recovery is the New Performance · Per-event rate applies</div>
+              </div>
+            </div>
+
+            <div class="commitment-pill" onclick="toggleCommitDate(this)" data-value="nov21">
+              <div class="cp-icon">📅</div>
+              <div>
+                <div class="cp-title">November 21, 2026 · Delray Beach</div>
+                <div class="cp-desc">Casa ManaBliss · Delray Beach, FL · Chosen Family — The Gifts We Share as a Conscious Community · Per-event rate applies</div>
+              </div>
+            </div>
+
+            <div class="commitment-pill" onclick="toggleCommitDate(this)" data-value="dec3">
+              <div class="cp-icon">📅</div>
+              <div>
+                <div class="cp-title">December 3, 2026 · Miami</div>
+                <div class="cp-desc">1000 Palms Hideout · Miami, FL · Art Basel Week · The Human Canvas — Mind, Body &amp; The Art of Potential · Per-event rate applies</div>
               </div>
             </div>
 
@@ -2102,6 +2052,8 @@
 
           </div>
         </div>
+
+        <!-- Booth Dimensions -->
 
         <!-- Booth Dimensions -->
         <div style="margin-top:24px;">
@@ -2273,44 +2225,40 @@
     </div>
 
     <div class="card">
-      <div class="field-group">
-        <label class="field-label">Product / Booth Photo Links</label>
-        <p class="field-hint" style="margin-bottom:12px;">Paste links to 1–3 photos of your products, booth setup, or brand in action. Used for vendor spotlight content and social features.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div>
-            <label style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#999;margin-bottom:4px;display:block;">Photo 1</label>
-            <input type="url" class="field-input" id="photoLink1" placeholder="https://drive.google.com/... or instagram.com/p/... or imgur.com/...">
-          </div>
-          <div>
-            <label style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#999;margin-bottom:4px;display:block;">Photo 2 <span style="color:#ccc;">(optional)</span></label>
-            <input type="url" class="field-input" id="photoLink2" placeholder="https://...">
-          </div>
-          <div>
-            <label style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#999;margin-bottom:4px;display:block;">Photo 3 <span style="color:#ccc;">(optional)</span></label>
-            <input type="url" class="field-input" id="photoLink3" placeholder="https://...">
-          </div>
-        </div>
-        <p class="field-hint" style="margin-top:8px;">Google Drive, Dropbox, Instagram, or any public image URL. Lifestyle shots or products on a clean background work best.</p>
-      </div>
-
       <div class="field-group" style="margin-bottom:0">
         <label class="field-label">Content Assets Available</label>
-        <div class="check-group">
-          <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox" name="assets" value="headshot">
-            <div class="check-box"></div>
-            <div class="check-label">Professional headshot / brand photo</div>
-          </label>
-          <label class="check-item" onclick="toggleCheck(this)">
+        <p class="field-hint" style="margin-bottom:12px;">Select what you have — a link box will open below each one so you can drop in the link.</p>
+        <div class="check-group" id="assetsGroup">
+          <label class="check-item" onclick="toggleAssetCheck(this)">
             <input type="checkbox" name="assets" value="video">
             <div class="check-box"></div>
-            <div class="check-label">Short video of product/service in action (30–90 sec)</div>
+            <div class="check-label">Product / service in action (10–20 sec)</div>
           </label>
-          <label class="check-item" onclick="toggleCheck(this)">
+          <div class="asset-link-wrap" id="assetLinkWrap-video" style="display:none;margin:2px 0 16px 34px;">
+            <input type="url" class="field-input" id="assetLink_video" placeholder="https://drive.google.com/... or instagram.com/reel/...">
+            <p class="field-hint" style="margin-top:4px;">Link to your 10–20 second product/service-in-action clip</p>
+          </div>
+
+          <label class="check-item" onclick="toggleAssetCheck(this)">
             <input type="checkbox" name="assets" value="reel">
             <div class="check-box"></div>
-            <div class="check-label">Existing Reel or TikTok we can repurpose</div>
+            <div class="check-label">Existing Instagram Reel / Post we can repurpose</div>
           </label>
+          <div class="asset-link-wrap" id="assetLinkWrap-reel" style="display:none;margin:2px 0 16px 34px;">
+            <input type="url" class="field-input" id="assetLink_reel" placeholder="https://instagram.com/reel/... or instagram.com/p/...">
+            <p class="field-hint" style="margin-top:4px;">Link to the existing Reel or post we can repurpose</p>
+          </div>
+
+          <label class="check-item" onclick="toggleAssetCheck(this)">
+            <input type="checkbox" name="assets" value="photo">
+            <div class="check-box"></div>
+            <div class="check-label">Product Shot / Highlight Photo</div>
+          </label>
+          <div class="asset-link-wrap" id="assetLinkWrap-photo" style="display:none;margin:2px 0 16px 34px;">
+            <input type="url" class="field-input" id="assetLink_photo" placeholder="https://drive.google.com/... or imgur.com/...">
+            <p class="field-hint" style="margin-top:4px;">Link to your product shot or highlight photo</p>
+          </div>
+
           <label class="check-item" onclick="toggleCheck(this)">
             <input type="checkbox" name="assets" value="none">
             <div class="check-box"></div>
@@ -2852,17 +2800,16 @@ function selectVendorType(el, type) {
 
 // ── ZONE SELECTION ──────────────────────────────────────────────────────
 const zoneNames = {
-  '01': 'Breath Portal',
-  '02': 'Consciousness Expansion',
-  '03': 'Sensorium Soundscapes',
-  '04': 'Quantum Reset Pod',
-  '05': 'The Warrior Path',
-  '06': 'Activation Arena',
-  '07': 'Knowledge Pavilion',
-  '08': 'Elixir Lounge',
-  '09': 'The Grove',
-  '10': 'The Village',
-  '11': 'Starfield'
+  'sound': 'Sound',
+  'frequency': 'Frequency',
+  'energy': 'Energy',
+  'vibration': 'Vibration'
+};
+const zoneRoman = {
+  'sound': 'I',
+  'frequency': 'II',
+  'energy': 'III',
+  'vibration': 'IV'
 };
 
 function selectZone(el, zone) {
@@ -2946,6 +2893,7 @@ function toggleThemeTag(el) {
   updateAlignmentScore();
 }
 
+
 function addCustomKeyword(e) {
   if (e.key !== 'Enter') return;
   const val = e.target.value.trim();
@@ -2969,6 +2917,21 @@ function toggleCheck(el) {
   setTimeout(() => {
     el.classList.toggle('checked', input.checked);
     box.textContent = input.checked ? '✓' : '';
+  }, 10);
+}
+
+function toggleAssetCheck(el) {
+  toggleCheck(el);
+  const input = el.querySelector('input[type="checkbox"]');
+  if (!input) return;
+  const wrap = document.getElementById('assetLinkWrap-' + input.value);
+  if (!wrap) return;
+  setTimeout(() => {
+    wrap.style.display = input.checked ? 'block' : 'none';
+    if (!input.checked) {
+      const linkInput = wrap.querySelector('input');
+      if (linkInput) linkInput.value = '';
+    }
   }, 10);
 }
 
@@ -3073,8 +3036,9 @@ function updateProfilePreview() {
   // Zones
   const zonesEl = document.getElementById('ppZones');
   if (state.zones.length > 0) {
-    zonesEl.innerHTML = state.zones.map(z => '<span class="pp-zone-badge">✦ Zone ' + z + ' · ' + (zoneNames[z] || '') + '</span>').join('');
+    zonesEl.innerHTML = state.zones.map(z => '<span class="pp-zone-badge">✦ Zone ' + (zoneRoman[z] || '') + ' · ' + (zoneNames[z] || '') + '</span>').join('');
   }
+
 
   // Keywords
   const tagsEl = document.getElementById('ppTags');
@@ -3143,6 +3107,10 @@ function submitProfile() {
     referralSource: gv('referralSource'),
     referrerName: gv('referrerName'),
     otherReferral: gv('otherReferral'),
+    contentAssets: (function(){ var els = document.querySelectorAll('#assetsGroup input[name="assets"]:checked'); return Array.prototype.map.call(els, function(e){ return e.value; }).join(', '); })(),
+    assetLinkVideo: gv('assetLink_video'),
+    assetLinkReel: gv('assetLink_reel'),
+    assetLinkPhoto: gv('assetLink_photo'),
     specialNotes: gv('specialNotes'),
     insurance: insuranceVal,
     participateGift: giftDonating ? 'yes' : 'no',
@@ -3307,20 +3275,20 @@ updateFollowerLabel(2);
       ? CATEGORY_TIERS[cat][tierIdx] : null;
 
     // Read commitment state
-    var lockInEl = document.querySelector('#commitmentGroup [data-value="3-event-lockin"].selected');
+    var lockInEl = document.querySelector('#commitmentGroup [data-value="all-dates-lockin"].selected');
     var isLockIn = !!lockInEl;
     var selectedDates = [];
     document.querySelectorAll('#commitmentGroup .commitment-pill.selected').forEach(function(p) {
       var v = p.getAttribute('data-value');
-      if (v !== '3-event-lockin') selectedDates.push(v);
+      if (v !== 'all-dates-lockin') selectedDates.push(v);
     });
     var isMonthly = selectedDates.indexOf('monthly-partner') !== -1;
 
     // Event label
-    var DATE_LABELS = { aug15: 'Aug 15', sep19: 'Sep 19', oct18: 'Oct 18', 'monthly-partner': 'Monthly Partner' };
+    var DATE_LABELS = { sep19: 'Sep 19', oct18: 'Oct 18', nov21: 'Nov 21', dec3: 'Dec 3', 'monthly-partner': 'Monthly Partner' };
     var eventLabel;
     if (isLockIn) {
-      eventLabel = '3-Event Lock-In Rate';
+      eventLabel = 'All 4 Dates Lock-In Rate';
     } else if (selectedDates.length === 0) {
       eventLabel = '—';
     } else {
@@ -3533,7 +3501,7 @@ updateFollowerLabel(2);
 
   function toggleCommitDate(el) {
     // Deselect lock-in when selecting individual dates
-    var lockIn = document.querySelector('#commitmentGroup [data-value="3-event-lockin"]');
+    var lockIn = document.querySelector('#commitmentGroup [data-value="all-dates-lockin"]');
     if (lockIn) lockIn.classList.remove('selected');
     // Toggle this date pill
     el.classList.toggle('selected');
